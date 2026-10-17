@@ -244,7 +244,7 @@ def main():
            .replace("%%BUILD_DATE%%", build_date)
            .replace("%%N_PROVIDERS%%", str(n_providers))
            .replace("%%N_MODELS%%", str(n_models)))
-    (HERE / "index.html").write_text(out, encoding="utf-8")
+    (HERE / "index.html").write_text(out, encoding="utf-8", newline="\n")
     print(f"built index.html: {n_providers} providers, {n_models} model rows, "
           f"{len(fnotes)} footnotes, synced {build_date}")
 
