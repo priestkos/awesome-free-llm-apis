@@ -1,0 +1,3 @@
+# one-off local copy of the source README (read-only, not part of the pipeline)
+source-README.md
+__pycache__/

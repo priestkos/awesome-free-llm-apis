@@ -1,0 +1,41 @@
+name: Weekly refresh
+
+# Pulls the latest README from mnfst/awesome-free-llm-apis over the network
+# (never local), rebuilds index.html, and commits it when it changed. The push
+# to main redeploys GitHub Pages automatically.
+on:
+  schedule:
+    - cron: '0 9 * * 1' # Mondays 09:00 UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: weekly-refresh
+  cancel-in-progress: true
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the site repo
+        uses: actions/checkout@v4
+
+      - name: Rebuild site from the source README
+        run: python3 build.py --remote
+
+      - name: Clean stale local source copy (not part of the pipeline)
+        run: rm -f source-README.md
+
+      - name: Commit the rebuilt site
+        run: |
+          if git diff --quiet -- index.html; then
+            echo "No changes in the source repo; nothing to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Weekly refresh: sync from mnfst/awesome-free-llm-apis @ $(date -u +%F)"
+          git push

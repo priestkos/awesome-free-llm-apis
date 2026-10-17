@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en" data-filter="all" data-q="">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Awesome Free LLM APIs</title>
+<meta name="description" content="LLM APIs with permanent free tiers for text inference. All endpoints are OpenAI SDK-compatible unless noted. Each link points to the provider's API key page.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,300..800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+:root{
+  --desk:#0b0806; --paper:#211a15; --sheet:#281f19; --ink:#e8e1d4; --muted:#998c7e;
+  --rule:#372f27; --rule-soft:#26201b; --pink:#ff4d6d; --blue:#4f6dff; --clover:#3fc76a;
+  --body:'Atkinson Hyperlegible',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --display:'Bricolage Grotesque',var(--body);
+  --mono:'Courier New',Courier,ui-monospace,monospace;
+  --maxw:1040px; --pad:clamp(16px,4vw,54px); --lh:1.55; --radius:0;
+}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--desk);color:var(--ink);font-family:var(--body);
+  font-size:16px;line-height:var(--lh);overflow-wrap:break-word}
+h1,h2,h3,h4{font-family:var(--display);line-height:1.1;margin:0}
+a{color:inherit;text-decoration-thickness:1px;text-underline-offset:2px}
+a:hover{color:var(--pink)}
+:focus-visible{outline:2px solid var(--pink);outline-offset:2px}
+.skip{position:absolute;left:-9999px;top:0}
+.skip:focus{left:12px;top:12px;z-index:99;background:var(--sheet);color:var(--ink);
+  padding:8px 12px;border:1px solid var(--rule)}
+code{font-family:var(--mono);font-size:.86em}
+
+/* the sheet on the desk: darkened edges of a riso photocopy, dark pass.
+   the halftone tooth lives on the SHEET (not over the text) so glyphs stay crisp */
+body::before{content:'';position:fixed;inset:0;bottom:0;pointer-events:none;z-index:-1;
+  width:min(var(--maxw),100%);left:50%;transform:translateX(-50%);
+  background:var(--paper);
+  background-image:repeating-radial-gradient(circle at 0 0,
+    rgba(232,225,212,.05) 0 .6px,rgba(232,225,212,0) .6px 3.2px);
+  background-size:5px 5px;
+  box-shadow:inset 10px 0 12px -10px rgba(0,0,0,.9),inset -10px 0 12px -10px rgba(0,0,0,.9),
+    inset 0 12px 12px -10px rgba(0,0,0,.9),inset 0 -14px 16px -12px rgba(0,0,0,.9),
+    0 0 0 1px rgba(232,225,212,.07),0 24px 70px rgba(0,0,0,.6)}
+
+/* ---------------------------------------------------------------- cover */
+.cover{max-width:var(--maxw);margin:0 auto;padding:clamp(22px,4vw,52px) var(--pad) 0}
+.imprint{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.4em 1.2em;margin:0;
+  font-family:var(--display);font-weight:700;font-size:.68rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted);border-bottom:2px solid var(--ink);padding-bottom:8px}
+.ztitle{font-family:var(--display);font-weight:800;text-transform:uppercase;
+  font-size:clamp(2rem,7vw,4.3rem);line-height:.98;letter-spacing:-.008em;
+  color:var(--blue);text-shadow:4px 3px 0 var(--pink);margin:.3em 0 .18em;
+  animation:misreg .6s cubic-bezier(.2,.9,.3,1.2) 1 both}
+@keyframes misreg{from{text-shadow:15px 11px 0 var(--pink);opacity:.25}
+  to{text-shadow:4px 3px 0 var(--pink);opacity:1}}
+.zsub{font-size:1.05rem;max-width:66ch;margin:0 0 .3em;color:var(--ink)}
+.znote{font-family:var(--mono);font-size:.8rem;max-width:70ch;margin:0 0 1.1em;color:var(--muted)}
+.zspec{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:4px 26px;
+  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:11px 0;margin:0 0 .6em}
+.zspec p{margin:0;font-size:.82rem;color:var(--muted);overflow-wrap:anywhere}
+.zspec b{display:block;font-family:var(--display);font-weight:700;font-size:.63rem;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--ink)}
+.ztoc{display:flex;flex-wrap:wrap;gap:.3em 1.4em;margin:0 0 .7em;font-family:var(--mono);
+  font-size:.82rem;list-style:none;padding:0}
+.ztoc li::before{content:'\2192\00a0';color:var(--pink)}
+.regmark{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.4em 1.2em;margin:0 0 0;
+  font-family:var(--display);font-size:.63rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--muted);border-top:1px solid var(--rule);padding:7px 0 4px}
+
+/* ---------------------------------------------------------------- toolbar */
+.bar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between;
+  max-width:var(--maxw);margin:0 auto;padding:10px var(--pad);font-size:.82rem;
+  position:sticky;top:0;z-index:40;background:var(--paper);
+  border-top:2px solid var(--ink);border-bottom:1px solid var(--rule)}
+.bar button{font-family:var(--display);font-weight:700;font-size:.67rem;text-transform:uppercase;
+  letter-spacing:.08em;border:1.5px solid var(--ink);border-radius:var(--radius);
+  background:var(--paper);color:var(--ink);box-shadow:2px 2px 0 var(--blue);
+  padding:.3em .66em;cursor:pointer;transition:box-shadow .12s ease,transform .12s ease}
+.bar button:hover{background:var(--pink);box-shadow:2px 2px 0 var(--ink)}
+.bar button:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--ink)}
+.bar button.is-on{background:var(--blue);color:var(--paper);box-shadow:2px 2px 0 var(--pink)}
+.bar button.is-on:hover{background:var(--blue)}
+.bar-set{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.bar label{font-family:var(--display);font-weight:700;font-size:.64rem;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--muted)}
+#search{font-family:var(--mono);font-size:.8rem;background:var(--sheet);color:var(--ink);
+  border:1.5px solid var(--ink);border-radius:var(--radius);padding:.32em .6em;min-width:0;
+  width:15ch;max-width:min(40ch,100%)}
+#search::placeholder{color:var(--muted)}
+.bar .toolset{gap:8px}
+#shown{font-family:var(--display);font-weight:700;font-size:.68rem;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);font-variant-numeric:tabular-nums;
+  min-width:11ch;text-align:right}
+
+/* ---------------------------------------------------------------- directory */
+.log{max-width:var(--maxw);margin:0 auto;padding:18px var(--pad) 4vh}
+.group{margin:0 0 34px}
+.group[hidden]{display:none}
+.g-head{display:flex;align-items:baseline;gap:.6em;flex-wrap:wrap;
+  border-bottom:3px solid var(--ink);padding-bottom:6px;margin:0 0 .2em}
+.g-title{font-family:var(--display);font-weight:800;font-size:clamp(1.25rem,3vw,1.7rem);
+  text-transform:uppercase;letter-spacing:-.01em}
+.g-title .g-no{color:var(--pink);margin-right:.35em}
+.g-intro{font-size:.9rem;color:var(--muted);margin:.45em 0 .9em;max-width:78ch}
+
+.card{position:relative;border:1.5px solid var(--ink);border-radius:2px;background:var(--sheet);
+  padding:0;margin:0 0 15px;box-shadow:4px 4px 0 rgba(79,109,255,.5)}
+[data-kind="inference"] .card{box-shadow:4px 4px 0 rgba(255,77,109,.5)}
+.card[open]{box-shadow:5px 5px 0 rgba(79,109,255,.85)}
+[data-kind="inference"] .card[open]{box-shadow:5px 5px 0 rgba(255,77,109,.85)}
+.card[hidden]{display:none}
+.card>summary{list-style:none;cursor:pointer;display:flex;flex-wrap:wrap;gap:.35em .8em;
+  align-items:center;padding:11px 14px}
+.card>summary::-webkit-details-marker{display:none}
+.card>summary::-webkit-details-marker,.card>summary::marker{content:''}
+.card>summary:hover{background:rgba(232,225,212,.04)}
+.seq{font-family:var(--display);font-weight:800;font-size:1rem;line-height:1;
+  background:var(--blue);color:var(--paper);width:2.05em;height:2.05em;min-width:2.05em;
+  display:inline-flex;align-items:center;justify-content:center;border-radius:50%;
+  box-shadow:3px 2px 0 var(--pink);font-variant-numeric:tabular-nums}
+[data-kind="inference"] .seq{background:var(--pink);box-shadow:3px 2px 0 var(--blue)}
+.pname{font-family:var(--display);font-weight:800;font-size:1rem;text-transform:uppercase;
+  letter-spacing:.03em}
+.flag{font-size:1rem}
+.klink{font-family:var(--display);font-weight:700;font-size:.62rem;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);background:var(--paper);
+  border:1px solid var(--rule);padding:.34em .6em;align-self:center;flex:0 0 auto;
+  text-decoration:none}
+.klink:hover{color:var(--pink);border-color:var(--pink)}
+.chip{margin-left:auto;font-family:var(--mono);font-size:.7rem;color:var(--muted);
+  border:1px solid var(--rule);padding:.2em .55em;white-space:nowrap;overflow:hidden;
+  text-overflow:ellipsis;max-width:26ch;background:var(--paper)}
+.chev{font-family:var(--display);font-weight:800;font-size:.95rem;color:var(--ink);
+  width:30px;height:30px;min-width:30px;display:inline-flex;align-items:center;
+  justify-content:center;background:var(--paper);border:1px solid var(--rule);
+  transition:transform .18s ease,color .18s ease,border-color .18s ease}
+.card[open] .chev{transform:rotate(45deg);background:var(--pink);color:var(--desk);
+  border-color:var(--pink)}
+.card{margin:0 0 17px}
+.card[open]>summary{border-bottom:1.5px solid var(--rule)}
+.c-body{padding:12px 16px 16px}
+.desc{margin:0 0 .9em;max-width:78ch}
+.desc p{margin:.45em 0}
+.desc sup a{text-decoration:none;font-weight:700;color:var(--blue)}
+[data-kind="inference"] .desc sup a{color:var(--pink)}
+
+.urlbox{display:flex;flex-wrap:wrap;align-items:stretch;gap:8px;padding:9px 11px;
+  border:1.5px solid var(--ink);background:var(--paper);margin:0 0 12px;
+  box-shadow:3px 3px 0 rgba(79,109,255,.5)}
+[data-kind="inference"] .urlbox{box-shadow:3px 3px 0 rgba(255,77,109,.5)}
+.urlbox-label{display:block;font-family:var(--display);font-weight:700;font-size:.61rem;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--muted);align-self:center}
+.urlbox code{align-self:center;background:none;font-size:.95rem;color:var(--ink);
+  overflow-wrap:anywhere;min-width:0;flex:1 1 auto}
+.copy{font-family:var(--display);font-weight:700;font-size:.66rem;text-transform:uppercase;
+  letter-spacing:.09em;align-self:center;flex:0 0 auto;border:1.5px solid var(--ink);
+  background:var(--sheet);color:var(--ink);padding:.5em .9em;border-radius:var(--radius);
+  cursor:pointer;min-height:38px;transition:box-shadow .12s ease,transform .12s ease,background .12s ease}
+.copy:hover{background:var(--blue);color:var(--paper);border-color:var(--ink)}
+[data-kind="inference"] .copy:hover{background:var(--pink);color:var(--paper)}
+.copy:active{transform:translate(2px,2px)}
+.copy.is-done{background:var(--clover);color:var(--desk)}
+
+.tablewrap{overflow-x:auto;border:1px solid var(--rule)}
+table{border-collapse:collapse;width:100%;font-family:var(--mono);font-size:.76rem;line-height:1.45}
+th{font-family:var(--display);font-weight:700;font-size:.62rem;letter-spacing:.1em;
+  text-transform:uppercase;text-align:left;color:var(--muted);
+  border-bottom:1.5px solid var(--ink);padding:8px 10px;white-space:nowrap}
+td{border-bottom:1px dotted var(--rule);padding:7px 10px;vertical-align:top;overflow-wrap:anywhere}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even) td{background:rgba(232,225,212,.025)}
+
+/* ------------------------------------------------------- glossary, notes */
+.side{margin:0 0 30px}
+.side h2{border-bottom:3px solid var(--ink)}
+.side p{margin:.5em 0;max-width:78ch;color:var(--ink)}
+.side .g-intro{color:var(--muted)}
+.smallprint{max-width:var(--maxw);margin:0 auto;padding:4px var(--pad) 8px;
+  column-count:2;column-gap:48px;column-rule:1px dashed var(--rule);
+  overflow-wrap:anywhere}
+.smallprint[hidden]{display:none}
+.fnote{font-size:.8rem;color:var(--muted);margin:0 0 .8em;break-inside:avoid;
+  overflow-wrap:anywhere}
+.fnote b a{color:var(--ink)}
+.fnote a{overflow-wrap:anywhere}
+@media (max-width:860px){.smallprint{column-count:1}}
+
+/* ---------------------------------------------------------------- footer */
+.colophon{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad) 70px}
+.colophon .rule{border-top:3px solid var(--ink);margin:18px 0 12px}
+.colophon p{font-size:.78rem;color:#a89b8c;margin:.35em 0}
+.colophon .stat-row{display:flex;justify-content:space-between;gap:1.4em;
+  border-bottom:1px dotted var(--rule);padding:.2em 0;font-size:.78rem}
+
+@media (max-width:700px){
+  .chip{display:none}
+  .bar{gap:8px 10px}
+  #search{flex:1 1 auto}
+  .zspec{grid-template-columns:1fr 1fr}
+}
+@media print{.bar,.copy{display:none}.card{page-break-inside:avoid}
+  body::before,body::after{display:none}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}
+  .ztitle{animation:none}}
+@media (prefers-contrast:more){
+  :root{--muted:#b3a798;--rule:#5a4f43}
+  body::after{display:none}
+}
+</style>
+</head>
+<body class="riso-zine">
+<a class="skip" href="#provider-apis">skip to directory</a>
+
+<header class="cover">
+  <p class="imprint"><span>Field guide zine</span><span>Issue 01</span><span>2026-10-17</span></p>
+  <h1 class="ztitle">Awesome Free LLM APIs</h1>
+  <p class="zsub">LLM APIs with permanent free tiers for text inference.</p>
+<p class="znote">All endpoints are OpenAI SDK-compatible unless noted. Each link points to the provider's API key page.</p>
+  <div class="zspec">
+    <p><b>Source</b><a href="https://github.com/mnfst/awesome-free-llm-apis">mnfst/awesome-free-llm-apis</a></p>
+    <p><b>Synced</b>2026-10-17</p>
+    <p><b>Refresh</b>Mondays 09:00 UTC</p>
+    <p><b>Contents</b>16 providers · 123 model rows · CC0-1.0 (upstream)</p>
+  </div>
+  <ul class="ztoc">
+    <li><a href="#provider-apis">Provider APIs</a></li>
+    <li><a href="#inference-providers">Inference providers</a></li>
+    <li><a href="#glossary">Glossary</a></li>
+  </ul>
+  <p class="regmark"><span>Fluorescent pink + blue · two passes</span><span>16 sections, stapled weekly</span></p>
+</header>
+
+<nav class="bar" aria-label="directory controls">
+  <div class="bar-set" role="group" aria-label="filter by kind">
+    <button type="button" class="js-filter is-on" data-filter="all">all</button>
+    <button type="button" class="js-filter" data-filter="provider">Provider APIs</button>
+    <button type="button" class="js-filter" data-filter="inference">Inference providers</button>
+  </div>
+  <div class="bar-set bar-jump">
+    <label for="search">find</label>
+    <input id="search" type="search" placeholder="press / to search" autocomplete="off">
+  </div>
+  <div class="bar-set toolset">
+    <button type="button" class="js-expand">open all</button>
+    <button type="button" class="js-collapse">close all</button>
+    <span id="shown"></span>
+  </div>
+</nav>
+
+<main class="log" id="directory">
+<section class="group" id="provider-apis" data-kind="provider">
+<div class="g-head"><h2 class="g-title"><span class="g-no">P</span>Provider APIs</h2></div>
+<p class="g-intro">APIs run by the companies that train or fine-tune the models themselves.</p>
+<details class="card" id="p-aion-labs" data-kind="provider">
+<summary>
+<span class="seq">01</span>
+<span class="pname">Aion Labs</span>
+<span class="flag">🇮🇱</span>
+<a class="klink" href="https://www.aionlabs.ai/app/api-keys/" target="_blank" rel="noopener">key page</a>
+<span class="chip" title="https://api.aionlabs.ai/v1">api.aionlabs.ai/v1</span>
+<span class="chev" aria-hidden="true">+</span>
+</summary>
+<div class="c-body">
+<div class="desc"><p>Permanent free tier, no credit card required. 15 RPM, 20K tokens/day. Specialized for roleplay and storytelling.</p></div>
+<div class="urlbox">
+<span class="urlbox-label">Base URL</span>
+<code data-url>https://api.aionlabs.ai/v1</code>
+<button type="button" class="copy" aria-label="Copy base URL">copy</button>
+</div>
+<div class="tablewrap"><table>
+<thead><tr><th scope="col">Model Name</th><th scope="col">Context</th><th scope="col">Max Output</th><th scope="col">Modality</th><th scope="col">Rate Limit</th></tr></thead>
+<tbody><tr><td><code>aion-labs/aion-2.0</code></td><td>128K</td><td>32K</td><td>Text (reasoning)</td><td>15 RPM, 20K TPD</td></tr><tr><td><code>aion-labs/aion-rp-llama-3.1-8b</code></td><td>32K</td><td>32K</td><td>Text</td><td>15 RPM, 20K TPD</td></tr><tr><td><code>aion-labs/aion-3.0</code></td><td>128K</td><td>32K</td><td>Text (reasoning)</td><td>15 RPM, 20K TPD</td></tr><tr><td><code>aion-labs/aion-3.0-mini</code></td><td>128K</td><td>32K</td><td>Text (reasoning)</td><td>15 RPM, 20K TPD</td></tr></tbody>
+</table></div>
+</div>
+</details>
+<details class="card" id="p-cohere" data-kind="provider">
+<summary>
+<span class="seq">02</span>
+<span class="pname">Cohere</span>
+<span class="flag">🇨🇦</span>
+<a class="klink" href="https://dashboard.cohere.com/api-keys" target="_blank" rel="noopener">key page</a>
+<span class="chip" title="https://api.cohere.com/v2">api.cohere.com/v2</span>
+<span class="chev" aria-hidden="true">+</span>
+</summary>
+<div class="c-body">
+<div class="desc"><p>Free &quot;Trial&quot; API key, no credit card. 1,000 API calls/month. Non-commercial use only.</p></div>
+<div class="urlbox">
+<span class="urlbox-label">Base URL</span>
+<code data-url>https://api.cohere.com/v2</code>
+<button type="button" class="copy" aria-label="Copy base URL">copy</button>
+</div>
+<div class="tablewrap"><table>
+<thead><tr><th scope="col">Model Name</th><th scope="col">Context</th><th scope="col">Max Output</th><th scope="col">Modality</th><th scope="col">Rate Limit</th></tr></thead>
+<tbody><tr><td>Command A+ (218B)</td><td>128K</td><td>64K</td><td>Text + Image</td><td>20 RPM</td></tr><tr><td>Command A (111B)</td><td>256K</td><td>8K</td><td>Text</td><td>20 RPM</td></tr><tr><td>Command R+</td><td>128K</td><td>4K</td><td>Text</td><td>20 RPM</td></tr><tr><td>Command R</td><td>128K</td><td>4K</td><td>Text</td><td>20 RPM</td></tr><tr><td>Command R7B</td><td>128K</td><td>4K</td><td>Text</td><td>20 RPM</td></tr><tr><td>Command A Reasoning</td><td>256K</td><td>32K</td><td>Text (reasoning)</td><td>20 RPM</td></tr><tr><td>Command A Translate</td><td>8K</td><td>8K</td><td>Text</td><td>20 RPM</td></tr><tr><td>Command A Vision</td><td>128K</td><td>8K</td><td>Text + Image</td><td>20 RPM</td></tr><tr><td>Command R7B Arabic</td><td>128K</td><td>~4K</td><td>Text</td><td>20 RPM</td></tr><tr><td>Aya Expanse 32B</td><td>128K</td><td>4K</td><td>Text</td><td>20 RPM</td></tr><tr><td>Aya Vision 32B</td><td>16K</td><td>4K</td><td>Text + Image</td><td>20 RPM</td></tr></tbody>
+</table></div>
+</div>
+</details>
+<details class="card" id="p-google-gemini" data-kind="provider">
+<summary>
+<span class="seq">03</span>
+<span class="pname">Google Gemini</span>
+<span class="flag">🇺🇸</span>
+<a class="klink" href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener">key page</a>
+<span class="chip" title="https://generativelanguage.googleapis.com/v1beta">generativelanguage.googleapis.com/v1beta</span>
+<span class="chev" aria-hidden="true">+</span>
+</summary>
+<div class="c-body">
+<div class="desc"><p>Free tier, no credit card. Free-tier prompts may be used by Google to improve products. <sup><a href="#fn-1" title="footnote">1</a></sup></p></div>
+<div class="urlbox">
+<span class="urlbox-label">Base URL</span>
+<code data-url>https://generativelanguage.googleapis.com/v1beta</code>
+<button type="button" class="copy" aria-label="Copy base URL">copy</button>
+</div>
+<div class="tablewrap"><table>
+<thead><tr><th scope="col">Model Name</th><th scope="col">Context</th><th scope="col">Max Output</th><th scope="col">Modality</th><th scope="col">Rate Limit</th></tr></thead>
+<tbody><tr><td>Gemini 3.8 Flash</td><td>1M</td><td>65K</td><td>Text + Image + Audio + Video</td><td>—</td></tr><tr><td>Gemini 3.7 Flash</td><td>1M</td><td>65K</td><td>Text + Image + Audio + Video</td><td>—</td></tr><tr><td>Gemini 3.6 Flash</td><td>1M</td><td>65K</td><td>Text + Image + Audio + Video</td><td>15 RPM, 1,500 RPD</td></tr><tr><td>Gemini 3.5 Flash</td><td>1M</td><td>65K</td><td>Text + Image + Audio + Video</td><td>15 RPM, 1,500 RPD</td></tr><tr><td>Gemini 3.5 Flash-Lite</td><td>1M</td><td>65K</td><td>Text + Image + Audio + Video</td><td>30 RPM, 1,500 RPD</td></tr><tr><td>Gemini 3.1 Flash-Lite</td><td>1M</td><td>65K</td><td>Text + Image + Audio + Video</td><td>30 RPM, 1,500 RPD</td></tr><tr><td>Gemini 2.5 Flash</td><td>1M</td><td>65K</td><td>Text + Image + Audio + Video</td><td>15 RPM, 1,500 RPD</td></tr><tr><td>Gemini 2.5 Flash-Lite</td><td>1M</td><td>65K</td><td>Text + Image + Audio + Video</td><td>30 RPM, 1,500 RPD</td></tr><tr><td>Gemini 2.5 Pro</td><td>1M</td><td>65K</td><td>Text + Image + Audio + Video</td><td>5 RPM, 50 RPD</td></tr><tr><td>Gemma 4 31B</td><td>256K</td><td>32K</td><td>Text</td><td>—</td></tr><tr><td>Gemma 4 26B A4B</td><td>256K</td><td>32K</td><td>Text</td><td>—</td></tr></tbody>
+</table></div>
+</div>
+</details>
+<details class="card" id="p-mistral-ai" data-kind="provider">
+<summary>
+<span class="seq">04</span>
+<span class="pname">Mistral AI</span>
+<span class="flag">🇫🇷</span>
+<a class="klink" href="https://console.mistral.ai/api-keys" target="_blank" rel="noopener">key page</a>
+<span class="chip" title="https://api.mistral.ai/v1">api.mistral.ai/v1</span>
+<span class="chev" aria-hidden="true">+</span>
+</summary>
+<div class="c-body">
+<div class="desc"><p>Free mode, enabled by default, no credit card required. $10/month in API credits, and free-mode prompts may be used to train Mistral models unless you opt out. <sup><a href="#fn-13" title="footnote">13</a></sup></p></div>
+<div class="urlbox">
+<span class="urlbox-label">Base URL</span>
+<code data-url>https://api.mistral.ai/v1</code>
+<button type="button" class="copy" aria-label="Copy base URL">copy</button>
+</div>
+<div class="tablewrap"><table>
+<thead><tr><th scope="col">Model Name</th><th scope="col">Context</th><th scope="col">Max Output</th><th scope="col">Modality</th><th scope="col">Rate Limit</th></tr></thead>
+<tbody><tr><td>Mistral Medium 3.5 (128B)</td><td>256K</td><td>—</td><td>Text + Image + Code</td><td>~1 RPS, 500K TPM</td></tr><tr><td>Mistral Small 4</td><td>256K</td><td>—</td><td>Text + Image + Code</td><td>~1 RPS, 500K TPM</td></tr><tr><td>Mistral Large 3</td><td>256K</td><td>—</td><td>Multimodal</td><td>~1 RPS, 500K TPM</td></tr><tr><td>Ministral 3 8B</td><td>256K</td><td>—</td><td>Text + Vision</td><td>~1 RPS, 500K TPM</td></tr><tr><td>Codestral</td><td>128K</td><td>—</td><td>Code</td><td>~1 RPS, 500K TPM</td></tr><tr><td>Ministral 3 3B</td><td>256K</td><td>—</td><td>Text + Vision</td><td>~1 RPS, 500K TPM</td></tr><tr><td>Ministral 3 14B</td><td>256K</td><td>—</td><td>Text + Vision</td><td>~1 RPS, 500K TPM</td></tr></tbody>
+</table></div>
+</div>
+</details>
+<details class="card" id="p-z-ai-zhipu-ai" data-kind="provider">
+<summary>
+<span class="seq">05</span>
+<span class="pname">Z AI (Zhipu AI)</span>
+<span class="flag">🇨🇳</span>
+<a class="klink" href="https://open.bigmodel.cn/usercenter/apikeys" target="_blank" rel="noopener">key page</a>
+<span class="chip" title="https://open.bigmodel.cn/api/paas/v4">open.bigmodel.cn/api/paas/v4</span>
+<span class="chev" aria-hidden="true">+</span>
+</summary>
+<div class="c-body">
+<div class="desc"><p>Permanent free models, no credit card required. <sup><a href="#fn-12" title="footnote">12</a></sup></p></div>
+<div class="urlbox">
+<span class="urlbox-label">Base URL</span>
+<code data-url>https://open.bigmodel.cn/api/paas/v4</code>
+<button type="button" class="copy" aria-label="Copy base URL">copy</button>
+</div>
+<div class="tablewrap"><table>
+<thead><tr><th scope="col">Model Name</th><th scope="col">Context</th><th scope="col">Max Output</th><th scope="col">Modality</th><th scope="col">Rate Limit</th></tr></thead>
+<tbody><tr><td>GLM-4.7-Flash</td><td>200K</td><td>128K</td><td>Text (reasoning)</td><td>1 concurrent request</td></tr><tr><td>GLM-4.5-Flash (retirement announced)</td><td>128K</td><td>96K</td><td>Text (reasoning)</td><td>1 concurrent request</td></tr><tr><td>GLM-4.6V-Flash</td><td>128K</td><td>32K</td><td>Multimodal</td><td>1 concurrent request</td></tr></tbody>
+</table></div>
+</div>
+</details></section>
+<section class="group" id="inference-providers" data-kind="inference">
+<div class="g-head"><h2 class="g-title"><span class="g-no">I</span>Inference providers</h2></div>
+<p class="g-intro">Third-party platforms that host open-weight models from various sources.</p>
+<details class="card" id="p-cloudflare-workers-ai" data-kind="inference">
+<summary>
+<span class="seq">06</span>
+<span class="pname">Cloudflare Workers AI</span>
+<span class="flag">🇺🇸</span>
+<a class="klink" href="https://dash.cloudflare.com/profile/api-tokens" target="_blank" rel="noopener">key page</a>
+<span class="chip" title="https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run">api.cloudflare.com/client/v4/accounts/{account_id}/ai/run</span>
+<span class="chev" aria-hidden="true">+</span>
+</summary>
+<div class="c-body">
+<div class="desc"><p>10,000 Neurons/day free, no credit card required. 60+ models available on the free tier. <sup><a href="#fn-11" title="footnote">11</a></sup></p></div>
+<div class="urlbox">
+<span class="urlbox-label">Base URL</span>
+<code data-url>https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run</code>
+<button type="button" class="copy" aria-label="Copy base URL">copy</button>
+</div>
+<div class="tablewrap"><table>
+<thead><tr><th scope="col">Model Name</th><th scope="col">Context</th><th scope="col">Max Output</th><th scope="col">Modality</th><th scope="col">Rate Limit</th></tr></thead>
+<tbody><tr><td><code>@cf/meta/llama-3.3-70b-instruct-fp8-fast</code></td><td>24K</td><td>Shared w/ context</td><td>Text</td><td>10K neurons/day (shared)</td></tr><tr><td><code>@cf/meta/llama-4-scout-17b-16e-instruct</code></td><td>131K</td><td>Shared w/ context</td><td>Multimodal</td><td>10K neurons/day (shared)</td></tr><tr><td><code>@cf/openai/gpt-oss-120b</code></td><td>128K</td><td>Shared w/ context</td><td>Text</td><td>10K neurons/day (shared)</td></tr><tr><td><code>@cf/google/gemma-4-26b-a4b-it</code></td><td>256K</td><td>Shared w/ context</td><td>Text + Vision</td><td>10K neurons/day (shared)</td></tr><tr><td><code>@cf/zai-org/glm-4.7-flash</code></td><td>131K</td><td>Shared w/ context</td><td>Text</td><td>10K neurons/day (shared)</td></tr><tr><td><code>@cf/mistralai/mistral-small-3.1-24b-instruct</code></td><td>128K</td><td>Shared w/ context</td><td>Text + Vision</td><td>10K neurons/day (shared)</td></tr><tr><td><code>@cf/deepseek-ai/deepseek-r1-distill-qwen-32b</code></td><td>80K</td><td>Shared w/ context</td><td>Text (reasoning)</td><td>10K neurons/day (shared)</td></tr><tr><td>+ 55 more models</td><td>Varies</td><td>Varies</td><td>Text, Image, Audio, Embeddings</td><td>10K neurons/day (shared)</td></tr></tbody>
+</table></div>
+</div>
+</details>
+<details class="card" id="p-groq" data-kind="inference">
+<summary>
+<span class="seq">07</span>
+<span class="pname">Groq</span>
+<span class="flag">🇺🇸</span>
+<a class="klink" href="https://console.groq.com/keys" target="_blank" rel="noopener">key page</a>
+<span class="chip" title="https://api.groq.com/openai/v1">api.groq.com/openai/v1</span>
+<span class="chev" aria-hidden="true">+</span>
+</summary>
+<div class="c-body">
+<div class="desc"><p>Free tier, no credit card. Ultra-fast LPU inference. <sup><a href="#fn-2" title="footnote">2</a></sup></p></div>
+<div class="urlbox">
+<span class="urlbox-label">Base URL</span>
+<code data-url>https://api.groq.com/openai/v1</code>
+<button type="button" class="copy" aria-label="Copy base URL">copy</button>
+</div>
+<div class="tablewrap"><table>
+<thead><tr><th scope="col">Model Name</th><th scope="col">Context</th><th scope="col">Max Output</th><th scope="col">Modality</th><th scope="col">Rate Limit</th></tr></thead>
+<tbody><tr><td><code>openai/gpt-oss-120b</code></td><td>131K</td><td>65K</td><td>Text</td><td>30 RPM, 1,000 RPD</td></tr><tr><td><code>openai/gpt-oss-20b</code></td><td>131K</td><td>65K</td><td>Text</td><td>30 RPM, 1,000 RPD</td></tr><tr><td><code>qwen/qwen3.8-27b</code></td><td>131K</td><td>16K</td><td>Text</td><td>30 RPM, 1,000 RPD</td></tr></tbody>
+</table></div>
+</div>
+</details>
+<details class="card" id="p-hugging-face" data-kind="inference">
+<summary>
+<span class="seq">08</span>
+<span class="pname">Hugging Face</span>
+<span class="flag">🇺🇸</span>
+<a class="klink" href="https://huggingface.co/settings/tokens" target="_blank" rel="noopener">key page</a>
+<span class="chip" title="https://router.huggingface.co/v1">router.huggingface.co/v1</span>
+<span class="chev" aria-hidden="true">+</span>
+</summary>
+<div class="c-body">
+<div class="desc"><p>$0.10/month in Inference Provider credits for free users (subject to change). Routes to Fireworks, Together, Hyperbolic, Nebius, Novita, DeepInfra and others. Thousands of models.</p></div>
+<div class="urlbox">
+<span class="urlbox-label">Base URL</span>
+<code data-url>https://router.huggingface.co/v1</code>
+<button type="button" class="copy" aria-label="Copy base URL">copy</button>
+</div>
+<div class="tablewrap"><table>
+<thead><tr><th scope="col">Model Name</th><th scope="col">Context</th><th scope="col">Max Output</th><th scope="col">Modality</th><th scope="col">Rate Limit</th></tr></thead>
+<tbody><tr><td>Meta-Llama-3.1-8B-Instruct</td><td>128K</td><td>~4K</td><td>Text</td><td>Credit-metered</td></tr><tr><td>gemma-3-4b-it</td><td>131K</td><td>~4K</td><td>Text</td><td>Credit-metered</td></tr><tr><td>phi-4</td><td>16K</td><td>~4K</td><td>Text</td><td>Credit-metered</td></tr><tr><td>Qwen2.5-Coder-7B-Instruct</td><td>131K</td><td>~4K</td><td>Text</td><td>Credit-metered</td></tr><tr><td>Qwen2.5-7B-Instruct</td><td>131K</td><td>~4K</td><td>Text</td><td>Credit-metered</td></tr><tr><td>+ thousands of community models</td><td>Varies</td><td>Varies</td><td>Text, Image, Audio, Embeddings</td><td>Credit-metered</td></tr></tbody>
+</table></div>
+</div>
+</details>
+<details class="card" id="p-kilo-code" data-kind="inference">
+<summary>
+<span class="seq">09</span>
+<span class="pname">Kilo Code</span>
+<span class="flag">🇺🇸</span>
+<a class="klink" href="https://app.kilo.ai/profile" target="_blank" rel="noopener">key page</a>
+<span class="chip" title="https://api.kilo.ai/api/gateway">api.kilo.ai/api/gateway</span>
+<span class="chev" aria-hidden="true">+</span>
+</summary>
+<div class="c-body">
+<div class="desc"><p>Free models with no credit card and no API key required. <code>kilo-auto/free</code> auto-router dynamically routes to models in the free pool. <sup><a href="#fn-5" title="footnote">5</a></sup></p></div>
+<div class="urlbox">
+<span class="urlbox-label">Base URL</span>
+<code data-url>https://api.kilo.ai/api/gateway</code>
+<button type="button" class="copy" aria-label="Copy base URL">copy</button>
+</div>
+<div class="tablewrap"><table>
+<thead><tr><th scope="col">Model Name</th><th scope="col">Context</th><th scope="col">Max Output</th><th scope="col">Modality</th><th scope="col">Rate Limit</th></tr></thead>
+<tbody><tr><td><code>nvidia/nemotron-3-ultra-550b-a55b:free</code></td><td>1M</td><td>65K</td><td>Text</td><td>200 req/hr</td></tr><tr><td><code>stepfun/step-3.7-flash:free</code></td><td>262K</td><td>262K</td><td>Text + Vision</td><td>200 req/hr</td></tr><tr><td><code>nvidia/nemotron-3-super-120b-a12b:free</code></td><td>262K</td><td>262K</td><td>Text</td><td>200 req/hr</td></tr><tr><td><code>nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free</code></td><td>256K</td><td>65K</td><td>Multimodal</td><td>200 req/hr</td></tr><tr><td><code>poolside/laguna-s-2.1:free</code></td><td>262K</td><td>32K</td><td>Text (code)</td><td>200 req/hr</td></tr><tr><td><code>poolside/laguna-xs-2.1:free</code></td><td>262K</td><td>32K</td><td>Text (code)</td><td>200 req/hr</td></tr><tr><td><code>cohere/north-mini-code:free</code></td><td>256K</td><td>64K</td><td>Text (code)</td><td>200 req/hr</td></tr><tr><td><code>openrouter/free</code></td><td>Varies</td><td>Varies</td><td>Text</td><td>200 req/hr</td></tr><tr><td><code>tencent/hy3:free</code></td><td>262K</td><td>128K</td><td>Text</td><td>200 req/hr</td></tr><tr><td><code>nvidia/nemotron-3.5-lightning:free</code></td><td>1M</td><td>65K</td><td>Text</td><td>200 req/hr</td></tr><tr><td><code>liquid/lfm-2.5-2.6b:free</code></td><td>64K</td><td>8K</td><td>Text</td><td>200 req/hr</td></tr><tr><td><code>kilo-auto/free</code></td><td>256K</td><td>32K</td><td>Text</td><td>200 req/hr</td></tr><tr><td><code>inclusionai/ling-3.1-flash</code></td><td>262K</td><td>32K</td><td>Text</td><td>200 req/hr</td></tr><tr><td><code>inclusionai/ling-3.0-flash-sante:free</code></td><td>262K</td><td>32K</td><td>Text</td><td>200 req/hr</td></tr><tr><td><code>apodex/apodex-1.1-mini:free</code></td><td>262K</td><td>235K</td><td>Text</td><td>200 req/hr</td></tr><tr><td><code>qwen/qwen3.8-27b:free</code></td><td>262K</td><td>235K</td><td>Multimodal</td><td>200 req/hr</td></tr><tr><td><code>dots-studio/dots-3-note-preview:free</code></td><td>512K</td><td>460K</td><td>Text + Vision</td><td>200 req/hr</td></tr></tbody>
+</table></div>
+</div>
+</details>
+<details class="card" id="p-llm7-io" data-kind="inference">
+<summary>
+<span class="seq">10</span>
+<span class="pname">LLM7.io</span>
+<span class="flag">🇬🇧</span>
+<a class="klink" href="https://token.llm7.io" target="_blank" rel="noopener">key page</a>
+<span class="chip" title="https://api.llm7.io/v1">api.llm7.io/v1</span>
+<span class="chev" aria-hidden="true">+</span>
+</summary>
+<div class="c-body">
+<div class="desc"><p>API gateway with a free tier. Anonymous access needs no key and reaches the <code>turbo</code> models; a free token from token.llm7.io raises the rate and token limits but reaches the same models. <sup><a href="#fn-10" title="footnote">10</a></sup></p></div>
+<div class="urlbox">
+<span class="urlbox-label">Base URL</span>
+<code data-url>https://api.llm7.io/v1</code>
+<button type="button" class="copy" aria-label="Copy base URL">copy</button>
+</div>
+<div class="tablewrap"><table>
+<thead><tr><th scope="col">Model Name</th><th scope="col">Context</th><th scope="col">Max Output</th><th scope="col">Modality</th><th scope="col">Rate Limit</th></tr></thead>
+<tbody><tr><td><code>gpt-oss:20b</code></td><td>128K</td><td>—</td><td>Text</td><td>60 RPM, 250 req/hr (free token)</td></tr><tr><td>mistral-Nemo-Instruct-2407</td><td>128K</td><td>—</td><td>Text</td><td>60 RPM, 250 req/hr (free token)</td></tr><tr><td>minimax-m2.7</td><td>180K</td><td>—</td><td>Text (reasoning)</td><td>60 RPM, 250 req/hr (free token)</td></tr><tr><td>DeepSeek-V4-Flash-0731</td><td>400K</td><td>—</td><td>Text (reasoning)</td><td>60 RPM, 250 req/hr (free token)</td></tr></tbody>
+</table></div>
+</div>
+</details>
+<details class="card" id="p-modelscope" data-kind="inference">
+<summary>
+<span class="seq">11</span>
+<span class="pname">ModelScope</span>
+<span class="flag">🇨🇳</span>
+<a class="klink" href="https://modelscope.cn/my/myaccesstoken" target="_blank" rel="noopener">key page</a>
+<span class="chip" title="https://api-inference.modelscope.cn/v1">api-inference.modelscope.cn/v1</span>
+<span class="chev" aria-hidden="true">+</span>
+</summary>
+<div class="c-body">
+<div class="desc"><p>Free API-Inference for registered users. Requires Alibaba Cloud account binding + real-name verification. <sup><a href="#fn-6" title="footnote">6</a></sup></p></div>
+<div class="urlbox">
+<span class="urlbox-label">Base URL</span>
+<code data-url>https://api-inference.modelscope.cn/v1</code>
+<button type="button" class="copy" aria-label="Copy base URL">copy</button>
+</div>
+<div class="tablewrap"><table>
+<thead><tr><th scope="col">Model Name</th><th scope="col">Context</th><th scope="col">Max Output</th><th scope="col">Modality</th><th scope="col">Rate Limit</th></tr></thead>
+<tbody><tr><td><code>Qwen/Qwen3.5-35B-A3B</code></td><td>256K</td><td>—</td><td>Text</td><td>2,000 RPD total; &lt;=500 RPD/model (dynamic)</td></tr><tr><td><code>Qwen/Qwen3.5-27B</code></td><td>256K</td><td>—</td><td>Text</td><td>2,000 RPD total; &lt;=500 RPD/model (dynamic)</td></tr><tr><td>+ API-Inference-enabled models</td><td>Varies</td><td>Varies</td><td>LLM, MLLM</td><td>Dynamic quotas + dynamic concurrency</td></tr></tbody>
+</table></div>
+</div>
+</details>
+<details class="card" id="p-nvidia-nim" data-kind="inference">
+<summary>
+<span class="seq">12</span>
+<span class="pname">NVIDIA NIM</span>
+<span class="flag">🇺🇸</span>
+<a class="klink" href="https://build.nvidia.com/explore/discover" target="_blank" rel="noopener">key page</a>
+<span class="chip" title="https://integrate.api.nvidia.com/v1">integrate.api.nvidia.com/v1</span>
+<span class="chev" aria-hidden="true">+</span>
+</summary>
+<div class="c-body">
+<div class="desc"><p>Free with NVIDIA Developer Program membership. 100+ models. Rate-limited per model.</p></div>
+<div class="urlbox">
+<span class="urlbox-label">Base URL</span>
+<code data-url>https://integrate.api.nvidia.com/v1</code>
+<button type="button" class="copy" aria-label="Copy base URL">copy</button>
+</div>
+<div class="tablewrap"><table>
+<thead><tr><th scope="col">Model Name</th><th scope="col">Context</th><th scope="col">Max Output</th><th scope="col">Modality</th><th scope="col">Rate Limit</th></tr></thead>
+<tbody><tr><td><code>nvidia/nemotron-3-super-120b-a12b</code></td><td>1M</td><td>262K</td><td>Text</td><td>40 RPM, 10,000 RPD</td></tr><tr><td><code>nvidia/llama-3.1-nemotron-ultra-253b-v1</code></td><td>128K</td><td>4K</td><td>Text</td><td>40 RPM, 10,000 RPD</td></tr><tr><td><code>google/gemma-4-31b-it</code></td><td>262K</td><td>8K</td><td>Text</td><td>40 RPM, 10,000 RPD</td></tr><tr><td><code>mistralai/mistral-large-2-instruct</code></td><td>128K</td><td>4K</td><td>Text</td><td>40 RPM, 10,000 RPD</td></tr><tr><td><code>nvidia/nemotron-3-ultra-550b-a55b</code></td><td>1M</td><td>262K</td><td>Text</td><td>40 RPM, 10,000 RPD</td></tr><tr><td><code>openai/gpt-oss-20b</code></td><td>131K</td><td>131K</td><td>Text</td><td>40 RPM, 10,000 RPD</td></tr><tr><td>+ 92 more models</td><td>Varies</td><td>Varies</td><td>Text, Image, Video, Speech, Embeddings</td><td>40 RPM, 10,000 RPD</td></tr></tbody>
+</table></div>
+</div>
+</details>
+<details class="card" id="p-ollama-cloud" data-kind="inference">
+<summary>
+<span class="seq">13</span>
+<span class="pname">Ollama Cloud</span>
+<span class="flag">🇺🇸</span>
+<a class="klink" href="https://ollama.com/settings/keys" target="_blank" rel="noopener">key page</a>
+<span class="chip" title="https://ollama.com/api">ollama.com/api</span>
+<span class="chev" aria-hidden="true">+</span>
+</summary>
+<div class="c-body">
+<div class="desc"><p>Free tier with usage limits. 16 cloud model families from the Ollama library. OpenAI SDK-compatible via <a href="https://ollama.com/v1">https://ollama.com/v1</a>. <sup><a href="#fn-3" title="footnote">3</a></sup></p></div>
+<div class="urlbox">
+<span class="urlbox-label">Base URL</span>
+<code data-url>https://ollama.com/api</code>
+<button type="button" class="copy" aria-label="Copy base URL">copy</button>
+</div>
+<div class="tablewrap"><table>
+<thead><tr><th scope="col">Model Name</th><th scope="col">Context</th><th scope="col">Max Output</th><th scope="col">Modality</th><th scope="col">Rate Limit</th></tr></thead>
+<tbody><tr><td>deepseek-v4-pro</td><td>1M</td><td>Model-dependent</td><td>Text</td><td>Session/weekly limits (unpublished)</td></tr><tr><td>deepseek-v4-flash</td><td>1M</td><td>Model-dependent</td><td>Text</td><td>Session/weekly limits (unpublished)</td></tr><tr><td>minimax-m3</td><td>512K</td><td>Model-dependent</td><td>Text</td><td>Session/weekly limits (unpublished)</td></tr><tr><td>kimi-k3</td><td>1M</td><td>Model-dependent</td><td>Text</td><td>Session/weekly limits (unpublished)</td></tr><tr><td><code>gpt-oss:120b</code></td><td>128K</td><td>Model-dependent</td><td>Text</td><td>Session/weekly limits (unpublished)</td></tr><tr><td><code>gpt-oss:20b</code></td><td>131K</td><td>Model-dependent</td><td>Text</td><td>Session/weekly limits (unpublished)</td></tr><tr><td>nemotron-3-ultra</td><td>262K</td><td>Model-dependent</td><td>Text</td><td>Session/weekly limits (unpublished)</td></tr><tr><td><code>mistral-large-3:675b</code></td><td>256K</td><td>Model-dependent</td><td>Text</td><td>Session/weekly limits (unpublished)</td></tr><tr><td><code>qwen3.5:397b</code></td><td>256K</td><td>Model-dependent</td><td>Text</td><td>Session/weekly limits (unpublished)</td></tr><tr><td>+ 7 more cloud models</td><td>Varies</td><td>Varies</td><td>Text</td><td>Session/weekly limits (unpublished)</td></tr></tbody>
+</table></div>
+</div>
+</details>
+<details class="card" id="p-openrouter" data-kind="inference">
+<summary>
+<span class="seq">14</span>
+<span class="pname">OpenRouter</span>
+<span class="flag">🇺🇸</span>
+<a class="klink" href="https://openrouter.ai/keys" target="_blank" rel="noopener">key page</a>
+<span class="chip" title="https://openrouter.ai/api/v1">openrouter.ai/api/v1</span>
+<span class="chev" aria-hidden="true">+</span>
+</summary>
+<div class="c-body">
+<div class="desc"><p>17 free models (marked with <code>:free</code> suffix). OpenAI SDK-compatible. <sup><a href="#fn-4" title="footnote">4</a></sup></p></div>
+<div class="urlbox">
+<span class="urlbox-label">Base URL</span>
+<code data-url>https://openrouter.ai/api/v1</code>
+<button type="button" class="copy" aria-label="Copy base URL">copy</button>
+</div>
+<div class="tablewrap"><table>
+<thead><tr><th scope="col">Model Name</th><th scope="col">Context</th><th scope="col">Max Output</th><th scope="col">Modality</th><th scope="col">Rate Limit</th></tr></thead>
+<tbody><tr><td><code>nvidia/nemotron-3-super-120b-a12b:free</code></td><td>262K</td><td>262K</td><td>Text</td><td>20 RPM, 50 RPD</td></tr><tr><td><code>cohere/north-mini-code:free</code></td><td>256K</td><td>64K</td><td>Text (code)</td><td>20 RPM, 50 RPD</td></tr><tr><td><code>google/gemma-4-26b-a4b-it:free</code></td><td>262K</td><td>32K</td><td>Text + Image</td><td>20 RPM, 50 RPD</td></tr><tr><td><code>google/gemma-4-31b-it:free</code></td><td>262K</td><td>32K</td><td>Text + Image</td><td>20 RPM, 50 RPD</td></tr><tr><td><code>nvidia/nemotron-nano-9b-v2:free</code></td><td>128K</td><td>—</td><td>Text</td><td>20 RPM, 50 RPD</td></tr><tr><td><code>nvidia/nemotron-nano-12b-v2-vl:free</code></td><td>128K</td><td>128K</td><td>Text + Image</td><td>20 RPM, 50 RPD</td></tr><tr><td><code>poolside/laguna-s-2.1:free</code></td><td>262K</td><td>32K</td><td>Text (code)</td><td>20 RPM, 50 RPD</td></tr><tr><td><code>poolside/laguna-xs-2.1:free</code></td><td>262K</td><td>32K</td><td>Text (code)</td><td>20 RPM, 50 RPD</td></tr><tr><td><code>apodex/apodex-1.1-mini:free</code></td><td>262K</td><td>235K</td><td>Text</td><td>20 RPM, 50 RPD</td></tr><tr><td><code>inclusionai/ling-3.0-flash-sante:free</code></td><td>262K</td><td>32K</td><td>Text</td><td>20 RPM, 50 RPD</td></tr><tr><td><code>qwen/qwen3.8-27b:free</code></td><td>262K</td><td>235K</td><td>Text + Image + Video</td><td>20 RPM, 50 RPD</td></tr><tr><td><code>dots-studio/dots-3-note-preview:free</code></td><td>512K</td><td>460K</td><td>Text + Image</td><td>20 RPM, 50 RPD</td></tr><tr><td><code>liquid/lfm-2.5-2.6b:free</code></td><td>64K</td><td>8K</td><td>Text</td><td>20 RPM, 50 RPD</td></tr><tr><td><code>nvidia/nemotron-3.5-lightning:free</code></td><td>1M</td><td>65K</td><td>Text</td><td>20 RPM, 50 RPD</td></tr><tr><td><code>thinkingmachines/inkling:free</code></td><td>1M</td><td>262K</td><td>Text + Image + Audio</td><td>20 RPM, 50 RPD</td></tr><tr><td><code>nvidia/nemotron-3-ultra-550b-a55b:free</code></td><td>1M</td><td>65K</td><td>Text</td><td>20 RPM, 50 RPD</td></tr><tr><td>+ 6 more free models</td><td>Varies</td><td>Varies</td><td>Text / Image</td><td>20 RPM, 50 RPD</td></tr></tbody>
+</table></div>
+</div>
+</details>
+<details class="card" id="p-ovhcloud-ai-endpoints" data-kind="inference">
+<summary>
+<span class="seq">15</span>
+<span class="pname">OVHcloud AI Endpoints</span>
+<span class="flag">🇫🇷</span>
+<a class="klink" href="https://www.ovhcloud.com/en/public-cloud/ai-endpoints/catalog/" target="_blank" rel="noopener">key page</a>
+<span class="chip" title="https://oai.endpoints.kepler.ai.cloud.ovh.net/v1">oai.endpoints.kepler.ai.cloud.ovh.net/v1</span>
+<span class="chev" aria-hidden="true">+</span>
+</summary>
+<div class="c-body">
+<div class="desc"><p>Free anonymous tier (no API key, no signup): 2 RPM per IP per model. 20+ open-weight models hosted in EU. OpenAI SDK-compatible. <sup><a href="#fn-7" title="footnote">7</a></sup></p></div>
+<div class="urlbox">
+<span class="urlbox-label">Base URL</span>
+<code data-url>https://oai.endpoints.kepler.ai.cloud.ovh.net/v1</code>
+<button type="button" class="copy" aria-label="Copy base URL">copy</button>
+</div>
+<div class="tablewrap"><table>
+<thead><tr><th scope="col">Model Name</th><th scope="col">Context</th><th scope="col">Max Output</th><th scope="col">Modality</th><th scope="col">Rate Limit</th></tr></thead>
+<tbody><tr><td>Qwen3.5-397B-A17B</td><td>262K</td><td>~32K</td><td>Text + Vision</td><td>2 RPM (anonymous)</td></tr><tr><td>gpt-oss-120b</td><td>128K</td><td>~32K</td><td>Text</td><td>2 RPM (anonymous)</td></tr><tr><td>gpt-oss-20b</td><td>128K</td><td>~8K</td><td>Text</td><td>2 RPM (anonymous)</td></tr><tr><td>Meta-Llama-3_3-70B-Instruct</td><td>131K</td><td>~4K</td><td>Text</td><td>2 RPM (anonymous)</td></tr><tr><td>Qwen3.8-27B</td><td>262K</td><td>—</td><td>Text + Vision</td><td>2 RPM (anonymous)</td></tr><tr><td>Qwen3.6-27B</td><td>262K</td><td>~32K</td><td>Text + Vision</td><td>2 RPM (anonymous)</td></tr><tr><td>Qwen3.5-9B</td><td>262K</td><td>~8K</td><td>Text + Vision</td><td>2 RPM (anonymous)</td></tr><tr><td>Qwen3-32B</td><td>131K</td><td>~32K</td><td>Text</td><td>2 RPM (anonymous)</td></tr><tr><td>Qwen2.5-VL-72B-Instruct</td><td>32K</td><td>~8K</td><td>Text + Vision</td><td>2 RPM (anonymous)</td></tr><tr><td>Mistral-Small-3.2-24B-Instruct</td><td>128K</td><td>~4K</td><td>Text</td><td>2 RPM (anonymous)</td></tr><tr><td>Mistral-Nemo-Instruct-2407</td><td>128K</td><td>~4K</td><td>Text</td><td>2 RPM (anonymous)</td></tr></tbody>
+</table></div>
+</div>
+</details>
+<details class="card" id="p-siliconflow" data-kind="inference">
+<summary>
+<span class="seq">16</span>
+<span class="pname">SiliconFlow</span>
+<span class="flag">🇨🇳</span>
+<a class="klink" href="https://cloud.siliconflow.cn/account/ak" target="_blank" rel="noopener">key page</a>
+<span class="chip" title="https://api.siliconflow.cn/v1">api.siliconflow.cn/v1</span>
+<span class="chev" aria-hidden="true">+</span>
+</summary>
+<div class="c-body">
+<div class="desc"><p>Permanently free models, no credit card required. Identity verification required. 100+ models in the catalog, most of them paid. <sup><a href="#fn-9" title="footnote">9</a></sup></p></div>
+<div class="urlbox">
+<span class="urlbox-label">Base URL</span>
+<code data-url>https://api.siliconflow.cn/v1</code>
+<button type="button" class="copy" aria-label="Copy base URL">copy</button>
+</div>
+<div class="tablewrap"><table>
+<thead><tr><th scope="col">Model Name</th><th scope="col">Context</th><th scope="col">Max Output</th><th scope="col">Modality</th><th scope="col">Rate Limit</th></tr></thead>
+<tbody><tr><td><code>Qwen/Qwen3-8B</code></td><td>128K</td><td>—</td><td>Text</td><td>1,000 RPM, 50,000 TPM</td></tr></tbody>
+</table></div>
+</div>
+</details></section>
+<section class="group side" id="glossary">
+<div class="g-head"><h2 class="g-title"><span class="g-no">G</span>Glossary</h2></div>
+<div class="tablewrap"><table>
+<thead><tr><th scope="col">Abbreviation</th><th scope="col">Meaning</th></tr></thead>
+<tbody><tr><td><b>RPM</b></td><td>Requests per minute</td></tr><tr><td><b>RPD</b></td><td>Requests per day</td></tr><tr><td><b>TPM</b></td><td>Tokens per minute</td></tr><tr><td><b>TPD</b></td><td>Tokens per day</td></tr><tr><td><b>RPS</b></td><td>Requests per second</td></tr></tbody>
+</table></div></section>
+<section class="group side" id="contributing">
+<div class="g-head"><h2 class="g-title"><span class="g-no">C</span>Contributing</h2></div>
+<p>Know a free tier that's missing? <a href="https://github.com/mnfst/awesome-free-llm-apis/blob/main/contributing.md">Open a PR</a>. Include the provider, endpoint, rate limits (link to their docs), and a few notable models. Trial credits and time-limited promos don't count.</p></section>
+</main>
+
+<section class="smallprint" id="footnotes" aria-label="footnotes"><p class="fnote" id="fn-1"><b><a href="#fn-1">[1]</a></b> The Gemini API free tier is available to developers in the EU, UK, and Switzerland; the <a href="https://ai.google.dev/gemini-api/docs/available-regions">available regions</a> page lists these regions. The <a href="https://ai.google.dev/gemini-api/terms">terms</a> still require you to use only Paid Services when you make an API Client available to users in the European Economic Area, Switzerland, or the UK. Google no longer publishes per-model free-tier rate limits; check your quotas in <a href="https://aistudio.google.com/">AI Studio</a>. Free-tier prompts may be used by Google to improve products, except for users in the EEA, Switzerland and the UK, where the paid-services data terms also govern the unpaid quota, so those prompts are not used to improve Google products. <code>gemini-3.1-flash-lite</code> is on the <a href="https://ai.google.dev/gemini-api/docs/deprecations">deprecation schedule</a>, with a shutdown date of May 7, 2027 and <code>gemini-3.5-flash-lite</code> as its replacement; the row stays because the model is live and free today.</p><p class="fnote" id="fn-2"><b><a href="#fn-2">[2]</a></b> Groq shut down qwen/qwen3.6-27b on September 14, 2026 (replaced by qwen/qwen3.8-27b) and groq/compound and groq/compound-mini on September 21, 2026 (<a href="https://console.groq.com/docs/deprecations">deprecations</a>). Free-plan limits vary by model; the chat models listed get 1,000 RPD (<a href="https://console.groq.com/docs/rate-limits">rate limits</a>).</p><p class="fnote" id="fn-3"><b><a href="#fn-3">[3]</a></b> Ollama Cloud measures usage by input, cached input, and output tokens weighted per model (<a href="https://docs.ollama.com/cloud">FAQ</a>). Free tier has session limits resetting every 5 hours and weekly limits resetting every 7 days. Cloud models are also served through Ollama's OpenAI-compatible endpoint at ollama.com/v1.</p><p class="fnote" id="fn-4"><b><a href="#fn-4">[4]</a></b> Free models default to 50 RPD per model. A one-time purchase of $10+ in credits unlocks 1,000 RPD for free models. OpenRouter also offers a <a href="https://openrouter.ai/docs/guides/routing/routers/free-models-router">Free Models Router</a> (<code>openrouter/free</code>) and <a href="https://openrouter.ai/docs/guides/routing/model-fallbacks">model fallbacks</a> for chaining models in priority order. Free providers may log prompts for training.</p><p class="fnote" id="fn-5"><b><a href="#fn-5">[5]</a></b> Kilo Code's free pool changes frequently, and the /api/gateway/models catalog can lag what is actually served: probe results have confirmed models absent from the catalog still answering. Rows through liquid/lfm-2.5-2.6b:free answered a live request between 2026-08-19 and 2026-08-21; the rows after it were added on 2026-10-05 from the catalog, where they are priced at $0, and have not been probed. Free models are reachable with no API key, at 200 requests per hour per IP (<a href="https://kilo.ai/docs/gateway/authentication">authentication</a>). The kilo-auto/free router picks a model from the free pool, and Kilo's docs warn it &quot;may route your requests to providers that log prompts and outputs&quot;. The NVIDIA free endpoints carry NVIDIA's own condition, quoted on Kilo's <a href="https://kilo.ai/docs/gateway/models-and-providers">models page</a>: &quot;Trial use only - do not submit personal or confidential data. Your use is logged for security purposes and to improve NVIDIA products and services.&quot;</p><p class="fnote" id="fn-6"><b><a href="#fn-6">[6]</a></b> API-Inference is free for registered users. Current published limits are 2,000 requests/day per user (total across models), with per-model daily quotas dynamically adjusted and capped at 500; concurrency is also dynamically rate-limited. Requires Alibaba Cloud account binding and real-name verification (<a href="https://modelscope.cn/docs/model-service/API-Inference/limits">limits</a>, <a href="https://modelscope.cn/docs/model-service/API-Inference/intro">intro</a>).</p><p class="fnote" id="fn-7"><b><a href="#fn-7">[7]</a></b> OVHcloud AI Endpoints offers a permanent free anonymous tier (2 requests per minute per IP, per model) with no signup or API key required. Higher rate limits (400 RPM per Public Cloud project per model) require an API key and are billed pay-as-you-go per token; new Public Cloud accounts get up to $200 in free trial credits. Models are hosted in EU data centers.</p><p class="fnote" id="fn-9"><b><a href="#fn-9">[9]</a></b> SiliconFlow requires real-name identity verification to use free models (effective May 15, 2026, per the <a href="https://api-docs.siliconflow.cn/docs/release-notes/overview">release notes</a>). Verification supports mainland-Chinese documents; international users must contact support.</p><p class="fnote" id="fn-10"><b><a href="#fn-10">[10]</a></b> LLM7.io rotates its catalog frequently, so the model list changes between checks. Access is tier-based, not token-based: <code>turbo</code> models are reachable anonymously or with a free token, <code>pro</code> models need the paid plan (<a href="https://docs.llm7.io/guides/models-api">models API</a>). A free token is capped at 1 RPS, 60 RPM, 250 requests per hour and 100,000 tokens per 24 hours, and the free quota may be reduced without notice (<a href="https://docs.llm7.io/limits">limits</a>). A paid Pro plan is available at $12/month. The docs no longer list anonymous (no-key) limits; anonymous access was last confirmed by live request on 2026-08-21.</p><p class="fnote" id="fn-11"><b><a href="#fn-11">[11]</a></b> The 10,000 free Neurons are shared across all Workers AI usage, not per model, and all limits reset daily at 00:00 UTC. Going over does not bill you, the request fails. Seven models are excluded from Workers Free billing and need the Workers Paid plan or prepaid AI Gateway credits: <code>@cf/moonshotai/kimi-k2.6</code>, <code>@cf/moonshotai/kimi-k2.7-code</code>, <code>@cf/zai-org/glm-5.2</code>, <code>@cf/zai-org/glm-5.3</code>, <code>@cf/zai-org/glm-5.3-flash</code>, <code>@cf/deepseek-ai/deepseek-v4-flash-0731</code>, <code>@cf/deepseek-ai/deepseek-v4-pro-0813</code> (<a href="https://developers.cloudflare.com/workers-ai/platform/pricing/">pricing</a>).</p><p class="fnote" id="fn-12"><b><a href="#fn-12">[12]</a></b> Registration accepts overseas phone numbers (<a href="https://docs.bigmodel.cn/cn/faq/registration-login.md">registration FAQ</a>) and the chat API does not require real-name verification: 目前调用 API 并不强制要求实名认证 (<a href="https://docs.bigmodel.cn/cn/faq/authentication-issues.md">authentication FAQ</a>). The Batch API does require it (<a href="https://docs.bigmodel.cn/cn/faq/batch-api-issues.md">batch FAQ</a>). The same free models are served from the international platform at <code><a href="https://api.z.ai/api/paas/v4">https://api.z.ai/api/paas/v4</a></code> (<a href="https://docs.z.ai/guides/develop/http/introduction">endpoint</a>), where GLM-4.7-Flash, GLM-4.5-Flash and GLM-4.6V-Flash are all priced Free (<a href="https://docs.z.ai/guides/overview/pricing.md">pricing</a>). Z AI has announced that GLM-4.5-Flash will be retired and its requests auto-routed to GLM-4.7-Flash (<a href="https://docs.bigmodel.cn/cn/guide/models/free/glm-4.5-flash.md">model page</a>); the announced date has already passed while the model is still catalogued and still priced Free, so treat that row as living on borrowed time.</p><p class="fnote" id="fn-13"><b><a href="#fn-13">[13]</a></b> Mistral plans are global: the monthly allowance is shared across Studio, the API, and Vibe Code, so CLI usage eats the same budget (<a href="https://docs.mistral.ai/admin/billing-usage/subscriptions">subscriptions</a>). Free mode is the default for new accounts and needs no credit card (<a href="https://docs.mistral.ai/getting-started/quickstarts/studio/activate-and-generate-api-key">quickstart</a>), and the Free plan card on the <a href="https://mistral.ai/pricing">pricing page</a> is what carries the $10/month in API credits figure quoted in the description. Free-mode inputs and outputs may be used to train Mistral models, and you can opt out at any time (<a href="https://help.mistral.ai/en/articles/347617-do-you-use-my-user-data-to-train-your-artificial-intelligence-models">data usage</a>). Mistral no longer publishes numeric free-tier rate limits and points you at the Limits page of the admin panel instead (<a href="https://help.mistral.ai/en/articles/698531-why-am-i-hitting-api-rate-limits-and-how-do-i-increase-them">rate limits</a>); the rate limit column is kept from the last published values.</p></section>
+
+<footer class="colophon">
+  <p class="rule"></p>
+  <p>Every word above is copied verbatim from
+  <a href="https://github.com/mnfst/awesome-free-llm-apis">mnfst/awesome-free-llm-apis</a>
+  (CC0-1.0); presentation only is added here.</p>
+  <p>Static build of 2026-10-17 · refreshed weekly by GitHub Actions · no trackers, no analytics.</p>
+</footer>
+
+<script>
+(function(){
+  var html=document.documentElement, cards=[].slice.call(document.querySelectorAll('details.card')),
+      groups=[].slice.call(document.querySelectorAll('.group')),
+      filterBtns=[].slice.call(document.querySelectorAll('.js-filter')),
+      search=document.getElementById('search'), shown=document.getElementById('shown');
+  function apply(){
+    var q=search.value.trim().toLowerCase(), vis=0;
+    cards.forEach(function(c){
+      var okK=(html.dataset.filter==='all'||c.dataset.kind===html.dataset.filter),
+          okQ=!q||c.querySelector('.pname').textContent.toLowerCase().indexOf(q)>-1;
+      c.hidden=!(okK&&okQ); if(!(okK&&okQ)){c.open=false;}
+      if(okK&&okQ)vis++;
+    });
+    groups.forEach(function(g){
+      var n=[].slice.call(g.querySelectorAll('details.card')).filter(function(c){return !c.hidden}).length;
+      g.hidden=(n===0&&g.querySelector('details.card'));
+    });
+    shown.textContent=vis+' of '+cards.length+' shown';
+  }
+  filterBtns.forEach(function(b){b.addEventListener('click',function(){
+    filterBtns.forEach(function(x){x.classList.remove('is-on')});
+    b.classList.add('is-on'); html.dataset.filter=b.dataset.filter; apply();});});
+  search.addEventListener('input',apply);
+  document.addEventListener('keydown',function(e){
+    if(e.key==='/'&&document.activeElement!==search){e.preventDefault();search.focus();}
+  });
+  document.querySelector('.js-expand').addEventListener('click',function(){cards.forEach(function(c){c.open=true})});
+  document.querySelector('.js-collapse').addEventListener('click',function(){cards.forEach(function(c){c.open=false})});
+
+  [].slice.call(document.querySelectorAll('button.copy')).forEach(function(b){
+    b.addEventListener('click',function(){
+      var box=b.closest('.urlbox').querySelector('code'), u=box.textContent.trim();
+      function done(){b.classList.add('is-done');var t=b.textContent;b.textContent='copied';
+        setTimeout(function(){b.classList.remove('is-done');b.textContent=t},1400);}
+      if(navigator.clipboard&&window.isSecureContext){
+        navigator.clipboard.writeText(u).then(done,function(){fallback()});}else{fallback();}
+      function fallback(){
+        var t=document.createElement('textarea');t.value=u;t.style.position='fixed';t.style.opacity='0';
+        document.body.appendChild(t);t.select();try{document.execCommand('copy');done();}catch(e){}
+        t.remove();
+      }
+    });
+  });
+  [].slice.call(document.querySelectorAll('.urlbox')).forEach(function(u){
+    u.addEventListener('click',function(e){
+      if(e.target.closest('button'))return;
+      var r=document.createRange();r.selectNodeContents(u.querySelector('code'));
+      var s=getSelection();s.removeAllRanges();s.addRange(r);
+    });
+  });
+  apply();
+})();
+</script>
+</body>
+</html>
