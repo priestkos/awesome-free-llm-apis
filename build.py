@@ -6,12 +6,9 @@ source README (mnfst/awesome-free-llm-apis, CC0-1.0). Chrome text (buttons,
 labels, colophon) is the only added copy.
 
 Usage:
-  python build.py            # one-off LOCAL build, reads ./source-README.md
-  python build.py --remote   # scheduled path: fetches the latest README over
-                             # the network (never local) -- used by GitHub Actions
+  python build.py   # fetches the latest source README, writes ./index.html
 """
 import re
-import sys
 import html as htmllib
 import datetime
 import pathlib
@@ -188,14 +185,9 @@ def head_part(title, gn, inner):
 
 
 def main():
-    remote = "--remote" in sys.argv
-    if remote:
-        with urllib.request.urlopen(RAW_URL, timeout=60) as r:
-            md = r.read().decode("utf-8")
-        print(f"fetched {RAW_URL} ({len(md)} bytes)")
-    else:
-        md = (HERE / "source-README.md").read_text(encoding="utf-8")
-        print("local one-off build from source-README.md")
+    with urllib.request.urlopen(RAW_URL, timeout=60) as r:
+        md = r.read().decode("utf-8")
+    print(f"fetched {RAW_URL} ({len(md)} bytes)")
 
     sec = split_sections(md)
 

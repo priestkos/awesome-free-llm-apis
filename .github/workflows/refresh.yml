@@ -1,8 +1,7 @@
 name: Weekly refresh
 
-# Pulls the latest README from mnfst/awesome-free-llm-apis over the network
-# (never local), rebuilds index.html, and commits it when it changed. The push
-# to main redeploys GitHub Pages automatically.
+# Pulls the latest README from mnfst/awesome-free-llm-apis, rebuilds index.html,
+# and commits it when it changed. The push to main redeploys GitHub Pages.
 on:
   schedule:
     - cron: '0 9 * * 1' # Mondays 09:00 UTC
@@ -23,10 +22,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Rebuild site from the source README
-        run: python3 build.py --remote
-
-      - name: Clean stale local source copy (not part of the pipeline)
-        run: rm -f source-README.md
+        run: python3 build.py
 
       - name: Commit the rebuilt site
         run: |
