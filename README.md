@@ -1,6 +1,6 @@
 # Awesome Free LLM APIs
 
-A dark riso-zine directory of every free LLM API in
+A directory of every free LLM API in
 [`mnfst/awesome-free-llm-apis`](https://github.com/mnfst/awesome-free-llm-apis):
 collapsible provider cards, one-click copy of each base URL, filter and search.
 
