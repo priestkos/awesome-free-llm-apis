@@ -212,15 +212,15 @@ tr:nth-child(even) td{background:rgba(232,225,212,.025)}
 <a class="skip" href="#provider-apis">skip to directory</a>
 
 <header class="cover">
-  <p class="imprint"><span>Field guide</span><span>Issue 01</span><span>2026-10-31</span></p>
+  <p class="imprint"><span>Field guide</span><span>Issue 01</span><span>2026-11-02</span></p>
   <h1 class="ztitle">Awesome Free LLM APIs</h1>
   <p class="zsub">LLM APIs with permanent free tiers for text inference.</p>
-<p class="znote">All endpoints are OpenAI SDK-compatible unless noted. Each link points to the provider's API key page.</p>
+<p class="znote">Most providers offer an OpenAI-compatible endpoint. Native and compatible base URLs can differ. Each link points to the provider's API key page.</p>
   <div class="zspec">
     <p><b>Source</b><a href="https://github.com/mnfst/awesome-free-llm-apis">mnfst/awesome-free-llm-apis</a></p>
-    <p><b>Synced</b>2026-10-31</p>
+    <p><b>Synced</b>2026-11-02</p>
     <p><b>Refresh</b>Mondays 09:00 UTC</p>
-    <p><b>Contents</b>15 providers · 104 model rows · CC0-1.0 (upstream)</p>
+    <p><b>Contents</b>15 providers · 97 model rows · CC0-1.0 (upstream)</p>
   </div>
   <ul class="ztoc">
     <li><a href="#provider-apis">Provider APIs</a></li>
@@ -262,11 +262,7 @@ tr:nth-child(even) td{background:rgba(232,225,212,.025)}
 </summary>
 <div class="c-body">
 <div class="desc"><p>Permanent free tier, no credit card required. 15 RPM, 20K tokens/day. Specialized for roleplay and storytelling.</p></div>
-<div class="urlbox">
-<span class="urlbox-label">Base URL</span>
-<code data-url>https://api.aionlabs.ai/v1</code>
-<button type="button" class="copy" aria-label="Copy base URL">copy</button>
-</div>
+<div class="urlbox"><span class="urlbox-label">Base URL</span><code data-url>https://api.aionlabs.ai/v1</code><button type="button" class="copy" aria-label="Copy Base URL">copy</button></div>
 <div class="tablewrap"><table>
 <thead><tr><th scope="col">Model Name</th><th scope="col">Context</th><th scope="col">Max Output</th><th scope="col">Modality</th><th scope="col">Rate Limit</th></tr></thead>
 <tbody><tr><td><code>aion-labs/aion-2.0</code></td><td>128K</td><td>32K</td><td>Text (reasoning)</td><td>15 RPM, 20K TPD</td></tr><tr><td><code>aion-labs/aion-rp-llama-3.1-8b</code></td><td>32K</td><td>32K</td><td>Text</td><td>15 RPM, 20K TPD</td></tr><tr><td><code>aion-labs/aion-3.0</code></td><td>128K</td><td>32K</td><td>Text (reasoning)</td><td>15 RPM, 20K TPD</td></tr><tr><td><code>aion-labs/aion-3.0-mini</code></td><td>128K</td><td>32K</td><td>Text (reasoning)</td><td>15 RPM, 20K TPD</td></tr></tbody>
@@ -284,11 +280,7 @@ tr:nth-child(even) td{background:rgba(232,225,212,.025)}
 </summary>
 <div class="c-body">
 <div class="desc"><p>Free &quot;Trial&quot; API key, no credit card. 1,000 API calls/month. Non-commercial use only.</p></div>
-<div class="urlbox">
-<span class="urlbox-label">Base URL</span>
-<code data-url>https://api.cohere.com/v2</code>
-<button type="button" class="copy" aria-label="Copy base URL">copy</button>
-</div>
+<div class="urlbox"><span class="urlbox-label">Native API base URL</span><code data-url>https://api.cohere.com/v2</code><button type="button" class="copy" aria-label="Copy Native API base URL">copy</button></div><div class="urlbox"><span class="urlbox-label">OpenAI-compatible base URL</span><code data-url>https://api.cohere.ai/compatibility/v1</code><button type="button" class="copy" aria-label="Copy OpenAI-compatible base URL">copy</button></div>
 <div class="tablewrap"><table>
 <thead><tr><th scope="col">Model Name</th><th scope="col">Context</th><th scope="col">Max Output</th><th scope="col">Modality</th><th scope="col">Rate Limit</th></tr></thead>
 <tbody><tr><td>Command A+ (218B)</td><td>128K</td><td>64K</td><td>Text + Image</td><td>20 RPM</td></tr><tr><td>Command A (111B)</td><td>256K</td><td>8K</td><td>Text</td><td>20 RPM</td></tr><tr><td>Command R+</td><td>128K</td><td>4K</td><td>Text</td><td>20 RPM</td></tr><tr><td>Command R</td><td>128K</td><td>4K</td><td>Text</td><td>20 RPM</td></tr><tr><td>Command R7B</td><td>128K</td><td>4K</td><td>Text</td><td>20 RPM</td></tr><tr><td>Command A Reasoning</td><td>256K</td><td>32K</td><td>Text (reasoning)</td><td>20 RPM</td></tr><tr><td>Command A Translate</td><td>8K</td><td>8K</td><td>Text</td><td>20 RPM</td></tr><tr><td>Command A Vision</td><td>128K</td><td>8K</td><td>Text + Image</td><td>20 RPM</td></tr><tr><td>Command R7B Arabic</td><td>128K</td><td>~4K</td><td>Text</td><td>20 RPM</td></tr><tr><td>Aya Expanse 32B</td><td>128K</td><td>4K</td><td>Text</td><td>20 RPM</td></tr><tr><td>Aya Vision 32B</td><td>16K</td><td>4K</td><td>Text + Image</td><td>20 RPM</td></tr></tbody>
@@ -306,11 +298,7 @@ tr:nth-child(even) td{background:rgba(232,225,212,.025)}
 </summary>
 <div class="c-body">
 <div class="desc"><p>Free tier, no credit card. Free-tier prompts may be used by Google to improve products. <sup><a href="#fn-1" title="footnote">1</a></sup></p></div>
-<div class="urlbox">
-<span class="urlbox-label">Base URL</span>
-<code data-url>https://generativelanguage.googleapis.com/v1beta</code>
-<button type="button" class="copy" aria-label="Copy base URL">copy</button>
-</div>
+<div class="urlbox"><span class="urlbox-label">Native API base URL</span><code data-url>https://generativelanguage.googleapis.com/v1beta</code><button type="button" class="copy" aria-label="Copy Native API base URL">copy</button></div><div class="urlbox"><span class="urlbox-label">OpenAI-compatible base URL</span><code data-url>https://generativelanguage.googleapis.com/v1beta/openai/</code><button type="button" class="copy" aria-label="Copy OpenAI-compatible base URL">copy</button></div>
 <div class="tablewrap"><table>
 <thead><tr><th scope="col">Model Name</th><th scope="col">Context</th><th scope="col">Max Output</th><th scope="col">Modality</th><th scope="col">Rate Limit</th></tr></thead>
 <tbody><tr><td>Gemini 3.8 Flash</td><td>1M</td><td>65K</td><td>Text + Image + Audio + Video</td><td>—</td></tr><tr><td>Gemini 3.6 Flash</td><td>1M</td><td>65K</td><td>Text + Image + Audio + Video</td><td>—</td></tr><tr><td>Gemini 3.5 Flash-Lite</td><td>1M</td><td>65K</td><td>Text + Image + Audio + Video</td><td>—</td></tr><tr><td>Gemini 3.1 Flash-Lite</td><td>1M</td><td>65K</td><td>Text + Image + Audio + Video</td><td>—</td></tr><tr><td>Gemini 2.5 Flash</td><td>1M</td><td>65K</td><td>Text + Image + Audio + Video</td><td>—</td></tr><tr><td>Gemini 2.5 Flash-Lite</td><td>1M</td><td>65K</td><td>Text + Image + Audio + Video</td><td>—</td></tr><tr><td>Gemma 4 31B</td><td>256K</td><td>32K</td><td>Text + Image</td><td>—</td></tr><tr><td>Gemma 4 26B A4B</td><td>256K</td><td>32K</td><td>Text + Image</td><td>—</td></tr></tbody>
@@ -328,11 +316,7 @@ tr:nth-child(even) td{background:rgba(232,225,212,.025)}
 </summary>
 <div class="c-body">
 <div class="desc"><p>Free mode, enabled by default, no credit card required. Free-mode prompts may be used to train Mistral models unless you opt out. <sup><a href="#fn-13" title="footnote">13</a></sup></p></div>
-<div class="urlbox">
-<span class="urlbox-label">Base URL</span>
-<code data-url>https://api.mistral.ai/v1</code>
-<button type="button" class="copy" aria-label="Copy base URL">copy</button>
-</div>
+<div class="urlbox"><span class="urlbox-label">Base URL</span><code data-url>https://api.mistral.ai/v1</code><button type="button" class="copy" aria-label="Copy Base URL">copy</button></div>
 <div class="tablewrap"><table>
 <thead><tr><th scope="col">Model Name</th><th scope="col">Context</th><th scope="col">Max Output</th><th scope="col">Modality</th><th scope="col">Rate Limit</th></tr></thead>
 <tbody><tr><td>Mistral Medium 3.5 (128B)</td><td>256K</td><td>—</td><td>Text + Image + Code</td><td>~1 RPS, 500K TPM</td></tr><tr><td>Mistral Small 4</td><td>256K</td><td>—</td><td>Text + Image + Code</td><td>~1 RPS, 500K TPM</td></tr><tr><td>Mistral Large 3</td><td>256K</td><td>—</td><td>Multimodal</td><td>~1 RPS, 500K TPM</td></tr><tr><td>Ministral 3 8B</td><td>256K</td><td>—</td><td>Text + Vision</td><td>~1 RPS, 500K TPM</td></tr><tr><td>Codestral</td><td>128K</td><td>—</td><td>Code</td><td>~1 RPS, 500K TPM</td></tr><tr><td>Ministral 3 3B</td><td>256K</td><td>—</td><td>Text + Vision</td><td>~1 RPS, 500K TPM</td></tr><tr><td>Ministral 3 14B</td><td>256K</td><td>—</td><td>Text + Vision</td><td>~1 RPS, 500K TPM</td></tr></tbody>
@@ -350,11 +334,7 @@ tr:nth-child(even) td{background:rgba(232,225,212,.025)}
 </summary>
 <div class="c-body">
 <div class="desc"><p>Permanent free models, no credit card required. <sup><a href="#fn-12" title="footnote">12</a></sup></p></div>
-<div class="urlbox">
-<span class="urlbox-label">Base URL</span>
-<code data-url>https://open.bigmodel.cn/api/paas/v4</code>
-<button type="button" class="copy" aria-label="Copy base URL">copy</button>
-</div>
+<div class="urlbox"><span class="urlbox-label">Base URL</span><code data-url>https://open.bigmodel.cn/api/paas/v4</code><button type="button" class="copy" aria-label="Copy Base URL">copy</button></div>
 <div class="tablewrap"><table>
 <thead><tr><th scope="col">Model Name</th><th scope="col">Context</th><th scope="col">Max Output</th><th scope="col">Modality</th><th scope="col">Rate Limit</th></tr></thead>
 <tbody><tr><td>GLM-4.7-Flash</td><td>200K</td><td>128K</td><td>Text (reasoning)</td><td>1 concurrent request</td></tr><tr><td>GLM-4.5-Flash (retirement announced)</td><td>128K</td><td>96K</td><td>Text (reasoning)</td><td>1 concurrent request</td></tr><tr><td>GLM-4.6V-Flash</td><td>128K</td><td>32K</td><td>Multimodal</td><td>1 concurrent request</td></tr></tbody>
@@ -375,11 +355,7 @@ tr:nth-child(even) td{background:rgba(232,225,212,.025)}
 </summary>
 <div class="c-body">
 <div class="desc"><p>10,000 Neurons/day free, no credit card required. 60+ models available on the free tier. <sup><a href="#fn-11" title="footnote">11</a></sup></p></div>
-<div class="urlbox">
-<span class="urlbox-label">Base URL</span>
-<code data-url>https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run</code>
-<button type="button" class="copy" aria-label="Copy base URL">copy</button>
-</div>
+<div class="urlbox"><span class="urlbox-label">Native API base URL</span><code data-url>https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run</code><button type="button" class="copy" aria-label="Copy Native API base URL">copy</button></div><div class="urlbox"><span class="urlbox-label">OpenAI-compatible base URL</span><code data-url>https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/v1</code><button type="button" class="copy" aria-label="Copy OpenAI-compatible base URL">copy</button></div>
 <div class="tablewrap"><table>
 <thead><tr><th scope="col">Model Name</th><th scope="col">Context</th><th scope="col">Max Output</th><th scope="col">Modality</th><th scope="col">Rate Limit</th></tr></thead>
 <tbody><tr><td><code>@cf/meta/llama-3.3-70b-instruct-fp8-fast</code></td><td>24K</td><td>Shared w/ context</td><td>Text</td><td>10K neurons/day (shared)</td></tr><tr><td><code>@cf/meta/llama-4-scout-17b-16e-instruct</code></td><td>131K</td><td>Shared w/ context</td><td>Multimodal</td><td>10K neurons/day (shared)</td></tr><tr><td><code>@cf/openai/gpt-oss-120b</code></td><td>128K</td><td>Shared w/ context</td><td>Text</td><td>10K neurons/day (shared)</td></tr><tr><td><code>@cf/google/gemma-4-26b-a4b-it</code></td><td>256K</td><td>Shared w/ context</td><td>Text + Vision</td><td>10K neurons/day (shared)</td></tr><tr><td><code>@cf/zai-org/glm-4.7-flash</code></td><td>131K</td><td>Shared w/ context</td><td>Text</td><td>10K neurons/day (shared)</td></tr><tr><td><code>@cf/mistralai/mistral-small-3.1-24b-instruct</code></td><td>128K</td><td>Shared w/ context</td><td>Text + Vision</td><td>10K neurons/day (shared)</td></tr><tr><td><code>@cf/deepseek-ai/deepseek-r1-distill-qwen-32b</code></td><td>80K</td><td>Shared w/ context</td><td>Text (reasoning)</td><td>10K neurons/day (shared)</td></tr><tr><td>+ 55 more models</td><td>Varies</td><td>Varies</td><td>Text, Image, Audio, Embeddings</td><td>10K neurons/day (shared)</td></tr></tbody>
@@ -397,11 +373,7 @@ tr:nth-child(even) td{background:rgba(232,225,212,.025)}
 </summary>
 <div class="c-body">
 <div class="desc"><p>Permanent free tier, no credit card required; phone verification required. ~1M tokens/month (shared, varies by model), resets monthly. Model lineup rotates with network governance — live list at /v1/models. <sup><a href="#fn-14" title="footnote">14</a></sup></p></div>
-<div class="urlbox">
-<span class="urlbox-label">Base URL</span>
-<code data-url>https://proxy.gonkabroker.com/v1</code>
-<button type="button" class="copy" aria-label="Copy base URL">copy</button>
-</div>
+<div class="urlbox"><span class="urlbox-label">Base URL</span><code data-url>https://proxy.gonkabroker.com/v1</code><button type="button" class="copy" aria-label="Copy Base URL">copy</button></div>
 <div class="tablewrap"><table>
 <thead><tr><th scope="col">Model Name</th><th scope="col">Context</th><th scope="col">Max Output</th><th scope="col">Modality</th><th scope="col">Rate Limit</th></tr></thead>
 <tbody><tr><td><code>MiniMaxAI/MiniMax-M2.7</code></td><td>200K</td><td>16K</td><td>Text (reasoning)</td><td>~1M tokens/month (shared, varies by model)</td></tr><tr><td><code>deepseek-ai/DeepSeek-V4-Flash-0731</code></td><td>400K</td><td>16K</td><td>Text (reasoning)</td><td>~1M tokens/month (shared, varies by model)</td></tr><tr><td><code>zai-org/GLM-5.3-Flash</code></td><td>400K</td><td>16K</td><td>Text (reasoning)</td><td>~1M tokens/month (shared, varies by model)</td></tr><tr><td><code>BAAI/bge-m3</code></td><td>8K</td><td>—</td><td>Embeddings</td><td>~1M tokens/month (shared, varies by model)</td></tr></tbody>
@@ -419,11 +391,7 @@ tr:nth-child(even) td{background:rgba(232,225,212,.025)}
 </summary>
 <div class="c-body">
 <div class="desc"><p>Free tier, no credit card. Ultra-fast LPU inference. <sup><a href="#fn-2" title="footnote">2</a></sup></p></div>
-<div class="urlbox">
-<span class="urlbox-label">Base URL</span>
-<code data-url>https://api.groq.com/openai/v1</code>
-<button type="button" class="copy" aria-label="Copy base URL">copy</button>
-</div>
+<div class="urlbox"><span class="urlbox-label">Base URL</span><code data-url>https://api.groq.com/openai/v1</code><button type="button" class="copy" aria-label="Copy Base URL">copy</button></div>
 <div class="tablewrap"><table>
 <thead><tr><th scope="col">Model Name</th><th scope="col">Context</th><th scope="col">Max Output</th><th scope="col">Modality</th><th scope="col">Rate Limit</th></tr></thead>
 <tbody><tr><td><code>openai/gpt-oss-120b</code></td><td>131K</td><td>65K</td><td>Text</td><td>30 RPM, 1,000 RPD</td></tr><tr><td><code>openai/gpt-oss-20b</code></td><td>131K</td><td>65K</td><td>Text</td><td>30 RPM, 1,000 RPD</td></tr><tr><td><code>qwen/qwen3.8-27b</code></td><td>131K</td><td>16K</td><td>Text + Image</td><td>30 RPM, 1,000 RPD</td></tr></tbody>
@@ -441,14 +409,10 @@ tr:nth-child(even) td{background:rgba(232,225,212,.025)}
 </summary>
 <div class="c-body">
 <div class="desc"><p>Free models with no credit card and no API key required. <code>kilo-auto/free</code> auto-router dynamically routes to models in the free pool. <sup><a href="#fn-5" title="footnote">5</a></sup></p></div>
-<div class="urlbox">
-<span class="urlbox-label">Base URL</span>
-<code data-url>https://api.kilo.ai/api/gateway</code>
-<button type="button" class="copy" aria-label="Copy base URL">copy</button>
-</div>
+<div class="urlbox"><span class="urlbox-label">Base URL</span><code data-url>https://api.kilo.ai/api/gateway</code><button type="button" class="copy" aria-label="Copy Base URL">copy</button></div>
 <div class="tablewrap"><table>
 <thead><tr><th scope="col">Model Name</th><th scope="col">Context</th><th scope="col">Max Output</th><th scope="col">Modality</th><th scope="col">Rate Limit</th></tr></thead>
-<tbody><tr><td><code>nvidia/nemotron-3-ultra-550b-a55b:free</code></td><td>1M</td><td>65K</td><td>Text</td><td>200 req/hr</td></tr><tr><td><code>nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free</code></td><td>256K</td><td>65K</td><td>Multimodal</td><td>200 req/hr</td></tr><tr><td><code>poolside/laguna-s-2.1:free</code></td><td>262K</td><td>32K</td><td>Text (code)</td><td>200 req/hr</td></tr><tr><td><code>poolside/laguna-xs-2.1:free</code></td><td>262K</td><td>32K</td><td>Text (code)</td><td>200 req/hr</td></tr><tr><td><code>cohere/north-mini-code:free</code></td><td>256K</td><td>64K</td><td>Text (code)</td><td>200 req/hr</td></tr><tr><td><code>openrouter/free</code></td><td>Varies</td><td>Varies</td><td>Text</td><td>200 req/hr</td></tr><tr><td><code>nvidia/nemotron-3.5-lightning:free</code></td><td>1M</td><td>65K</td><td>Text</td><td>200 req/hr</td></tr><tr><td><code>liquid/lfm-2.5-2.6b:free</code></td><td>64K</td><td>8K</td><td>Text</td><td>200 req/hr</td></tr><tr><td><code>kilo-auto/free</code></td><td>256K</td><td>32K</td><td>Text</td><td>200 req/hr</td></tr><tr><td><code>dots-studio/dots-3-note-preview:free</code></td><td>512K</td><td>460K</td><td>Text + Vision</td><td>200 req/hr</td></tr><tr><td><code>recursive/flint-v1.0:free</code></td><td>262K</td><td>235K</td><td>Text (code)</td><td>200 req/hr</td></tr><tr><td><code>xingchen-agi/xing4.0-29b-a4b:free</code></td><td>262K</td><td>235K</td><td>Text</td><td>200 req/hr</td></tr><tr><td><code>nvidia/nemotron-3.5-super-vl:free</code></td><td>1M</td><td>131K</td><td>Multimodal</td><td>200 req/hr</td></tr><tr><td><code>reflection/beam-free</code></td><td>1M</td><td>131K</td><td>Text</td><td>200 req/hr</td></tr><tr><td><code>stealth/glyph-cluster</code></td><td>256K</td><td>256K</td><td>Text (code)</td><td>200 req/hr</td></tr><tr><td><code>nvidia/nemotron-3.5-content-safety:free</code></td><td>128K</td><td>8K</td><td>Text + Vision (moderation)</td><td>200 req/hr</td></tr></tbody>
+<tbody><tr><td><code>nvidia/nemotron-3-ultra-550b-a55b:free</code></td><td>1M</td><td>65K</td><td>Text</td><td>200 req/hr</td></tr><tr><td><code>nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free</code></td><td>256K</td><td>65K</td><td>Multimodal</td><td>200 req/hr</td></tr><tr><td><code>cohere/north-mini-code:free</code></td><td>256K</td><td>64K</td><td>Text (code)</td><td>200 req/hr</td></tr><tr><td><code>openrouter/free</code></td><td>Varies</td><td>Varies</td><td>Text</td><td>200 req/hr</td></tr><tr><td><code>nvidia/nemotron-3.5-lightning:free</code></td><td>1M</td><td>65K</td><td>Text</td><td>200 req/hr</td></tr><tr><td><code>liquid/lfm-2.5-2.6b:free</code></td><td>64K</td><td>8K</td><td>Text</td><td>200 req/hr</td></tr><tr><td><code>kilo-auto/free</code></td><td>256K</td><td>32K</td><td>Text</td><td>200 req/hr</td></tr><tr><td><code>dots-studio/dots-3-note-preview:free</code></td><td>512K</td><td>460K</td><td>Text + Vision</td><td>200 req/hr</td></tr><tr><td><code>recursive/flint-v1.0:free</code></td><td>262K</td><td>235K</td><td>Text (code)</td><td>200 req/hr</td></tr><tr><td><code>xingchen-agi/xing4.0-29b-a4b:free</code></td><td>262K</td><td>235K</td><td>Text</td><td>200 req/hr</td></tr><tr><td><code>nvidia/nemotron-3.5-super-vl:free</code></td><td>1M</td><td>131K</td><td>Multimodal</td><td>200 req/hr</td></tr><tr><td><code>reflection/beam-free</code></td><td>1M</td><td>131K</td><td>Text</td><td>200 req/hr</td></tr><tr><td><code>stealth/glyph-cluster</code></td><td>256K</td><td>256K</td><td>Text (code)</td><td>200 req/hr</td></tr></tbody>
 </table></div>
 </div>
 </details>
@@ -463,14 +427,10 @@ tr:nth-child(even) td{background:rgba(232,225,212,.025)}
 </summary>
 <div class="c-body">
 <div class="desc"><p>API gateway with a free tier. Anonymous access needs no key and reaches the <code>turbo</code> models; a free token from token.llm7.io raises the rate and token limits but reaches the same models. <sup><a href="#fn-10" title="footnote">10</a></sup></p></div>
-<div class="urlbox">
-<span class="urlbox-label">Base URL</span>
-<code data-url>https://api.llm7.io/v1</code>
-<button type="button" class="copy" aria-label="Copy base URL">copy</button>
-</div>
+<div class="urlbox"><span class="urlbox-label">Base URL</span><code data-url>https://api.llm7.io/v1</code><button type="button" class="copy" aria-label="Copy Base URL">copy</button></div>
 <div class="tablewrap"><table>
 <thead><tr><th scope="col">Model Name</th><th scope="col">Context</th><th scope="col">Max Output</th><th scope="col">Modality</th><th scope="col">Rate Limit</th></tr></thead>
-<tbody><tr><td><code>gpt-oss:20b</code></td><td>128K</td><td>—</td><td>Text</td><td>60 RPM, 250 req/hr (free token)</td></tr><tr><td>mistral-Nemo-Instruct-2407</td><td>128K</td><td>—</td><td>Text</td><td>60 RPM, 250 req/hr (free token)</td></tr><tr><td>minimax-m2.7</td><td>180K</td><td>—</td><td>Text (reasoning)</td><td>60 RPM, 250 req/hr (free token)</td></tr><tr><td><code>nemotron-3-nano:30b</code></td><td>1M</td><td>—</td><td>Text (reasoning)</td><td>60 RPM, 250 req/hr (free token)</td></tr><tr><td>codestral-latest</td><td>32K</td><td>—</td><td>Text</td><td>60 RPM, 250 req/hr (free token)</td></tr></tbody>
+<tbody><tr><td><code>gpt-oss:20b</code></td><td>128K</td><td>—</td><td>Text</td><td>60 RPM, 250 req/hr (free token)</td></tr><tr><td>mistral-Nemo-Instruct-2407</td><td>128K</td><td>—</td><td>Text</td><td>60 RPM, 250 req/hr (free token)</td></tr><tr><td><code>nemotron-3-nano:30b</code></td><td>1M</td><td>—</td><td>Text (reasoning)</td><td>60 RPM, 250 req/hr (free token)</td></tr><tr><td>codestral-latest</td><td>32K</td><td>—</td><td>Text</td><td>60 RPM, 250 req/hr (free token)</td></tr></tbody>
 </table></div>
 </div>
 </details>
@@ -485,11 +445,7 @@ tr:nth-child(even) td{background:rgba(232,225,212,.025)}
 </summary>
 <div class="c-body">
 <div class="desc"><p>Free API-Inference for registered users. Requires Alibaba Cloud account binding + real-name verification. <sup><a href="#fn-6" title="footnote">6</a></sup></p></div>
-<div class="urlbox">
-<span class="urlbox-label">Base URL</span>
-<code data-url>https://api-inference.modelscope.cn/v1</code>
-<button type="button" class="copy" aria-label="Copy base URL">copy</button>
-</div>
+<div class="urlbox"><span class="urlbox-label">Base URL</span><code data-url>https://api-inference.modelscope.cn/v1</code><button type="button" class="copy" aria-label="Copy Base URL">copy</button></div>
 <div class="tablewrap"><table>
 <thead><tr><th scope="col">Model Name</th><th scope="col">Context</th><th scope="col">Max Output</th><th scope="col">Modality</th><th scope="col">Rate Limit</th></tr></thead>
 <tbody><tr><td><code>Qwen/Qwen3.5-35B-A3B</code></td><td>256K</td><td>—</td><td>Text</td><td>2,000 RPD total; &lt;=500 RPD/model (dynamic)</td></tr><tr><td><code>Qwen/Qwen3.5-27B</code></td><td>256K</td><td>—</td><td>Text</td><td>2,000 RPD total; &lt;=500 RPD/model (dynamic)</td></tr><tr><td>+ API-Inference-enabled models</td><td>Varies</td><td>Varies</td><td>LLM, MLLM</td><td>Dynamic quotas + dynamic concurrency</td></tr></tbody>
@@ -507,11 +463,7 @@ tr:nth-child(even) td{background:rgba(232,225,212,.025)}
 </summary>
 <div class="c-body">
 <div class="desc"><p>Free with NVIDIA Developer Program membership. 100+ models. Rate-limited per model.</p></div>
-<div class="urlbox">
-<span class="urlbox-label">Base URL</span>
-<code data-url>https://integrate.api.nvidia.com/v1</code>
-<button type="button" class="copy" aria-label="Copy base URL">copy</button>
-</div>
+<div class="urlbox"><span class="urlbox-label">Base URL</span><code data-url>https://integrate.api.nvidia.com/v1</code><button type="button" class="copy" aria-label="Copy Base URL">copy</button></div>
 <div class="tablewrap"><table>
 <thead><tr><th scope="col">Model Name</th><th scope="col">Context</th><th scope="col">Max Output</th><th scope="col">Modality</th><th scope="col">Rate Limit</th></tr></thead>
 <tbody><tr><td><code>google/gemma-4-31b-it</code></td><td>262K</td><td>8K</td><td>Text + Image + Video</td><td>40 RPM, 10,000 RPD</td></tr><tr><td><code>nvidia/nemotron-3-ultra-550b-a55b</code></td><td>1M</td><td>262K</td><td>Text</td><td>40 RPM, 10,000 RPD</td></tr><tr><td><code>openai/gpt-oss-20b</code></td><td>131K</td><td>131K</td><td>Text</td><td>40 RPM, 10,000 RPD</td></tr><tr><td>+ 92 more models</td><td>Varies</td><td>Varies</td><td>Text, Image, Video, Speech, Embeddings</td><td>40 RPM, 10,000 RPD</td></tr></tbody>
@@ -529,14 +481,10 @@ tr:nth-child(even) td{background:rgba(232,225,212,.025)}
 </summary>
 <div class="c-body">
 <div class="desc"><p>17 free models (marked with <code>:free</code> suffix). OpenAI SDK-compatible. <sup><a href="#fn-4" title="footnote">4</a></sup></p></div>
-<div class="urlbox">
-<span class="urlbox-label">Base URL</span>
-<code data-url>https://openrouter.ai/api/v1</code>
-<button type="button" class="copy" aria-label="Copy base URL">copy</button>
-</div>
+<div class="urlbox"><span class="urlbox-label">Base URL</span><code data-url>https://openrouter.ai/api/v1</code><button type="button" class="copy" aria-label="Copy Base URL">copy</button></div>
 <div class="tablewrap"><table>
 <thead><tr><th scope="col">Model Name</th><th scope="col">Context</th><th scope="col">Max Output</th><th scope="col">Modality</th><th scope="col">Rate Limit</th></tr></thead>
-<tbody><tr><td><code>cohere/north-mini-code:free</code></td><td>256K</td><td>64K</td><td>Text (code)</td><td>20 RPM, 50 RPD</td></tr><tr><td><code>google/gemma-4-26b-a4b-it:free</code></td><td>262K</td><td>32K</td><td>Text + Image + Video</td><td>20 RPM, 50 RPD</td></tr><tr><td><code>google/gemma-4-31b-it:free</code></td><td>262K</td><td>32K</td><td>Text + Image + Video</td><td>20 RPM, 50 RPD</td></tr><tr><td><code>poolside/laguna-s-2.1:free</code></td><td>262K</td><td>32K</td><td>Text (code)</td><td>20 RPM, 50 RPD</td></tr><tr><td><code>poolside/laguna-xs-2.1:free</code></td><td>262K</td><td>32K</td><td>Text (code)</td><td>20 RPM, 50 RPD</td></tr><tr><td><code>dots-studio/dots-3-note-preview:free</code></td><td>512K</td><td>460K</td><td>Text + Image</td><td>20 RPM, 50 RPD</td></tr><tr><td><code>liquid/lfm-2.5-2.6b:free</code></td><td>64K</td><td>8K</td><td>Text</td><td>20 RPM, 50 RPD</td></tr><tr><td><code>nvidia/nemotron-3.5-lightning:free</code></td><td>1M</td><td>65K</td><td>Text</td><td>20 RPM, 50 RPD</td></tr><tr><td><code>thinkingmachines/inkling:free</code></td><td>1M</td><td>262K</td><td>Text + Image + Audio</td><td>20 RPM, 50 RPD</td></tr><tr><td><code>nvidia/nemotron-3-ultra-550b-a55b:free</code></td><td>1M</td><td>65K</td><td>Text</td><td>20 RPM, 50 RPD</td></tr><tr><td><code>recursive/flint-v1.0:free</code></td><td>262K</td><td>235K</td><td>Text</td><td>20 RPM, 50 RPD</td></tr><tr><td><code>xingchen-agi/xing4.0-29b-a4b:free</code></td><td>262K</td><td>235K</td><td>Text</td><td>20 RPM, 50 RPD</td></tr><tr><td><code>nvidia/nemotron-3.5-super-vl:free</code></td><td>1M</td><td>131K</td><td>Text + Image + Video</td><td>20 RPM, 50 RPD</td></tr><tr><td><code>nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free</code></td><td>256K</td><td>65K</td><td>Text + Image + Audio + Video</td><td>20 RPM, 50 RPD</td></tr><tr><td><code>thinkingmachines/inkling-small:free</code></td><td>1M</td><td>262K</td><td>Text + Image + Audio</td><td>20 RPM, 50 RPD</td></tr><tr><td><code>nvidia/nemotron-3.5-content-safety:free</code></td><td>128K</td><td>8K</td><td>Text + Image (moderation)</td><td>20 RPM, 50 RPD</td></tr></tbody>
+<tbody><tr><td><code>cohere/north-mini-code:free</code></td><td>256K</td><td>64K</td><td>Text (code)</td><td>20 RPM, 50 RPD</td></tr><tr><td><code>google/gemma-4-26b-a4b-it:free</code></td><td>262K</td><td>32K</td><td>Text + Image + Video</td><td>20 RPM, 50 RPD</td></tr><tr><td><code>google/gemma-4-31b-it:free</code></td><td>262K</td><td>32K</td><td>Text + Image + Video</td><td>20 RPM, 50 RPD</td></tr><tr><td><code>dots-studio/dots-3-note-preview:free</code></td><td>512K</td><td>460K</td><td>Text + Image</td><td>20 RPM, 50 RPD</td></tr><tr><td><code>liquid/lfm-2.5-2.6b:free</code></td><td>64K</td><td>8K</td><td>Text</td><td>20 RPM, 50 RPD</td></tr><tr><td><code>nvidia/nemotron-3.5-lightning:free</code></td><td>1M</td><td>65K</td><td>Text</td><td>20 RPM, 50 RPD</td></tr><tr><td><code>thinkingmachines/inkling:free</code></td><td>1M</td><td>262K</td><td>Text + Image + Audio</td><td>20 RPM, 50 RPD</td></tr><tr><td><code>nvidia/nemotron-3-ultra-550b-a55b:free</code></td><td>1M</td><td>65K</td><td>Text</td><td>20 RPM, 50 RPD</td></tr><tr><td><code>recursive/flint-v1.0:free</code></td><td>262K</td><td>235K</td><td>Text</td><td>20 RPM, 50 RPD</td></tr><tr><td><code>xingchen-agi/xing4.0-29b-a4b:free</code></td><td>262K</td><td>235K</td><td>Text</td><td>20 RPM, 50 RPD</td></tr><tr><td><code>nvidia/nemotron-3.5-super-vl:free</code></td><td>1M</td><td>131K</td><td>Text + Image + Video</td><td>20 RPM, 50 RPD</td></tr><tr><td><code>nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free</code></td><td>256K</td><td>65K</td><td>Text + Image + Audio + Video</td><td>20 RPM, 50 RPD</td></tr><tr><td><code>thinkingmachines/inkling-small:free</code></td><td>1M</td><td>262K</td><td>Text + Image + Audio</td><td>20 RPM, 50 RPD</td></tr></tbody>
 </table></div>
 </div>
 </details>
@@ -551,11 +499,7 @@ tr:nth-child(even) td{background:rgba(232,225,212,.025)}
 </summary>
 <div class="c-body">
 <div class="desc"><p>Free anonymous tier (no API key, no signup): 2 RPM per IP per model. 20+ open-weight models hosted in EU. OpenAI SDK-compatible. <sup><a href="#fn-7" title="footnote">7</a></sup></p></div>
-<div class="urlbox">
-<span class="urlbox-label">Base URL</span>
-<code data-url>https://oai.endpoints.kepler.ai.cloud.ovh.net/v1</code>
-<button type="button" class="copy" aria-label="Copy base URL">copy</button>
-</div>
+<div class="urlbox"><span class="urlbox-label">Base URL</span><code data-url>https://oai.endpoints.kepler.ai.cloud.ovh.net/v1</code><button type="button" class="copy" aria-label="Copy Base URL">copy</button></div>
 <div class="tablewrap"><table>
 <thead><tr><th scope="col">Model Name</th><th scope="col">Context</th><th scope="col">Max Output</th><th scope="col">Modality</th><th scope="col">Rate Limit</th></tr></thead>
 <tbody><tr><td>Qwen3.5-397B-A17B</td><td>262K</td><td>~32K</td><td>Text + Vision</td><td>2 RPM (anonymous)</td></tr><tr><td>gpt-oss-120b</td><td>131K</td><td>~32K</td><td>Text</td><td>2 RPM (anonymous)</td></tr><tr><td>gpt-oss-20b</td><td>131K</td><td>~8K</td><td>Text</td><td>2 RPM (anonymous)</td></tr><tr><td>Meta-Llama-3_3-70B-Instruct</td><td>131K</td><td>~4K</td><td>Text</td><td>2 RPM (anonymous)</td></tr><tr><td>Qwen3.8-27B</td><td>262K</td><td>—</td><td>Text + Vision</td><td>2 RPM (anonymous)</td></tr><tr><td>Qwen3.6-27B</td><td>262K</td><td>~32K</td><td>Text + Vision</td><td>2 RPM (anonymous)</td></tr><tr><td>Qwen3.5-9B</td><td>262K</td><td>~8K</td><td>Text + Vision</td><td>2 RPM (anonymous)</td></tr><tr><td>Qwen2.5-VL-72B-Instruct</td><td>32K</td><td>~8K</td><td>Text + Vision</td><td>2 RPM (anonymous)</td></tr><tr><td>Mistral-Small-3.2-24B-Instruct</td><td>128K</td><td>~4K</td><td>Text + Vision</td><td>2 RPM (anonymous)</td></tr><tr><td>Mistral-Nemo-Instruct-2407</td><td>118K</td><td>~4K</td><td>Text</td><td>2 RPM (anonymous)</td></tr></tbody>
@@ -573,11 +517,7 @@ tr:nth-child(even) td{background:rgba(232,225,212,.025)}
 </summary>
 <div class="c-body">
 <div class="desc"><p>Permanently free models, no credit card required. Identity verification required. 100+ models in the catalog, most of them paid. <sup><a href="#fn-9" title="footnote">9</a></sup></p></div>
-<div class="urlbox">
-<span class="urlbox-label">Base URL</span>
-<code data-url>https://api.siliconflow.cn/v1</code>
-<button type="button" class="copy" aria-label="Copy base URL">copy</button>
-</div>
+<div class="urlbox"><span class="urlbox-label">Base URL</span><code data-url>https://api.siliconflow.cn/v1</code><button type="button" class="copy" aria-label="Copy Base URL">copy</button></div>
 <div class="tablewrap"><table>
 <thead><tr><th scope="col">Model Name</th><th scope="col">Context</th><th scope="col">Max Output</th><th scope="col">Modality</th><th scope="col">Rate Limit</th></tr></thead>
 <tbody><tr><td><code>tencent/Hunyuan-MT-7B</code></td><td>—</td><td>—</td><td>Text</td><td>—</td></tr><tr><td><code>XingChenAGI/Xing4.0-29B</code></td><td>—</td><td>—</td><td>Text</td><td>—</td></tr></tbody>
@@ -602,7 +542,7 @@ tr:nth-child(even) td{background:rgba(232,225,212,.025)}
   <p>Every word above is copied verbatim from
   <a href="https://github.com/mnfst/awesome-free-llm-apis">mnfst/awesome-free-llm-apis</a>
   (CC0-1.0); presentation only is added here.</p>
-  <p>Static build of 2026-10-31 · refreshed weekly by GitHub Actions · no trackers, no analytics.</p>
+  <p>Static build of 2026-11-02 · refreshed weekly by GitHub Actions · no trackers, no analytics.</p>
 </footer>
 
 <script>
