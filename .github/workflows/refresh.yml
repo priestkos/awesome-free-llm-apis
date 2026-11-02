@@ -11,7 +11,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: weekly-refresh
+  group: weekly-refresh-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -20,6 +20,9 @@ jobs:
     steps:
       - name: Check out the site repo
         uses: actions/checkout@v4
+
+      - name: Test build
+        run: python3 -m unittest discover -s tests -v
 
       - name: Rebuild site from the source README
         run: python3 build.py

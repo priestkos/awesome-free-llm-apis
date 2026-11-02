@@ -111,12 +111,18 @@ def parse_provider(block_lines):
     m = re.match(r"^###\s*\[(.+?)\]\((\S+)\)\s*(\S+)\s*$", lines[0])
     assert m, f"bad provider header: {lines[0]!r}"
     name, url, flag = m.group(1), m.group(2), m.group(3)
-    k = next((i for i, l in enumerate(lines) if l.startswith("Base URL:")), None)
-    assert k is not None, f"no Base URL in {name}"
-    base = re.match(r"^Base URL:\s*`([^`]+)`", lines[k]).group(1)
-    desc_paras = paragraphs(lines[1:k])  # skip the heading line itself
+    urls = []
+    first_url = None
+    for i, line in enumerate(lines):
+        match = re.match(r"^((?:Native API |OpenAI-compatible )?[Bb]ase URL):\s*`([^`]+)`", line)
+        if match:
+            if first_url is None:
+                first_url = i
+            urls.append((match.group(1), match.group(2)))
+    assert urls, f"no Base URL in {name}"
+    desc_paras = paragraphs(lines[1:first_url])  # skip the heading line itself
     table = parse_table(lines) if any(l.strip().startswith("|") for l in lines) else None
-    return {"name": name, "key_url": resolve(url), "flag": flag, "base": base,
+    return {"name": name, "key_url": resolve(url), "flag": flag, "urls": urls,
             "desc_paras": desc_paras, "table": table}
 
 
@@ -143,6 +149,13 @@ def parse_group(lines):
 def card_html(pr, kind, seq):
     desc = "".join(f"<p>{inline(p)}</p>" for p in pr["desc_paras"])
     table = render_table(pr["table"]) if pr["table"] else ""
+    primary_url = pr["urls"][0][1]
+    urlboxes = "".join(
+        f'<div class="urlbox"><span class="urlbox-label">{esc(label)}</span>'
+        f'<code data-url>{esc(url)}</code>'
+        f'<button type="button" class="copy" aria-label="Copy {esc(label)}">copy</button></div>'
+        for label, url in pr["urls"]
+    )
     return f"""
 <details class="card" id="p-{slug(pr['name'])}" data-kind="{kind}">
 <summary>
@@ -150,16 +163,12 @@ def card_html(pr, kind, seq):
 <span class="pname">{esc(pr["name"])}</span>
 <span class="flag">{esc(pr["flag"])}</span>
 <a class="klink" href="{esc(pr["key_url"])}" target="_blank" rel="noopener">key page</a>
-<span class="chip" title="{esc(pr["base"])}">{esc(pr["base"].removeprefix("https://"))}</span>
+<span class="chip" title="{esc(primary_url)}">{esc(primary_url.removeprefix("https://"))}</span>
 <span class="chev" aria-hidden="true">+</span>
 </summary>
 <div class="c-body">
 <div class="desc">{desc}</div>
-<div class="urlbox">
-<span class="urlbox-label">Base URL</span>
-<code data-url>{esc(pr["base"])}</code>
-<button type="button" class="copy" aria-label="Copy base URL">copy</button>
-</div>
+{urlboxes}
 {table}
 </div>
 </details>"""
@@ -191,10 +200,11 @@ def main():
 
     sec = split_sections(md)
 
-    # tagline + subnote live in the preamble HTML, above "## Contents"
-    tagline = re.search(r"<p[^>]*>(LLM APIs[^<]*)</p>", md.replace("\r\n", "\n"))
-    subnote = re.search(r"<sub>(All endpoints.*?)</sub>",
-                        md.replace("\r\n", "\n"), re.S)
+    # Keep the first note with the tagline, not later sponsor text.
+    preamble = md.replace("\r\n", "\n").split("<hr>", 1)[0]
+    tagline = re.search(r"<p[^>]*>(LLM APIs[^<]*)</p>", preamble)
+    subnote = re.search(r"<p[^>]*>\s*<sub>([^<]+)</sub>\s*</p>",
+                        preamble[tagline.end():]) if tagline else None
     assert tagline and subnote, "preamble tagline/subnote not found"
     tagline = tagline.group(1).strip()
     subnote = " ".join(subnote.group(1).split())
