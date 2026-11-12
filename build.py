@@ -71,6 +71,8 @@ def parse_table(lines):
     rows = []
     for l in lines:
         if not l.strip().startswith("|"):
+            if rows:
+                break  # first table only; a later table is not model rows
             continue
         cells = [c.strip() for c in l.strip().strip("|").split("|")]
         if all(re.fullmatch(r":?-{2,}:?", c) for c in cells):

@@ -22,5 +22,14 @@ class InlineTests(unittest.TestCase):
         self.assertTrue(out.endswith('>w</a>.'), out)
 
 
+class TableTests(unittest.TestCase):
+    def test_only_first_table_in_block(self):
+        lines = ['| A | B |', '| --- | --- |', '| 1 | 2 |', '', 'note', '',
+                 '| X | Y |', '| --- | --- |', '| 3 | 4 |']
+        head, body = build.parse_table(lines)
+        self.assertEqual(head, ['A', 'B'])
+        self.assertEqual(body, [['1', '2']])
+
+
 if __name__ == '__main__':
     unittest.main()
