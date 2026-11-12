@@ -71,6 +71,17 @@ class BuildTests(unittest.TestCase):
         self.assertIn('All endpoints are OpenAI SDK-compatible unless noted.', output)
         self.assertIn('data-url>https://example.com/native</code>', output)
 
+    def test_footnotes_rendered_and_referenced(self):
+        readme = README.replace('Free trial.', 'Free trial.[^1]') + '[^1]: Needs a card.\n'
+        out = self.build(readme)
+        self.assertIn('href="#fn-1"', out)
+        self.assertIn('id="fn-1"', out)
+        self.assertIn('Needs a card.', out)
+
+    def test_glossary_table_rendered(self):
+        out = self.build(README)
+        self.assertIn('<td>RPM</td><td>Requests per minute</td>', out)
+
 
 if __name__ == '__main__':
     unittest.main()
