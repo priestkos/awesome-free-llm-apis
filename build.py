@@ -74,7 +74,8 @@ def parse_table(lines):
             if rows:
                 break  # first table only; a later table is not model rows
             continue
-        cells = [c.strip() for c in l.strip().strip("|").split("|")]
+        cells = [c.strip().replace(r"\|", "|")
+                 for c in re.split(r"(?<!\\)\|", l.strip().strip("|"))]
         if all(re.fullmatch(r":?-{2,}:?", c) for c in cells):
             continue
         rows.append(cells)

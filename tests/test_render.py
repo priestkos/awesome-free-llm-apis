@@ -30,6 +30,10 @@ class TableTests(unittest.TestCase):
         self.assertEqual(head, ['A', 'B'])
         self.assertEqual(body, [['1', '2']])
 
+    def test_escaped_pipe_stays_in_cell(self):
+        _, body = build.parse_table(['| A | B |', '| --- | --- |', r'| `a\|b` | 2 |'])
+        self.assertEqual(body, [['`a|b`', '2']])
+
 
 if __name__ == '__main__':
     unittest.main()
