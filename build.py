@@ -111,8 +111,7 @@ def split_sections(md: str):
     return sec
 
 
-def parse_provider(block_lines):
-    lines = block_lines
+def parse_provider(lines):
     m = re.match(r"^###\s*\[(.+?)\]\((\S+)\)\s*(\S+)\s*$", lines[0])
     assert m, f"bad provider header: {lines[0]!r}"
     name, url, flag = m.group(1), m.group(2), m.group(3)

@@ -270,9 +270,8 @@ tr:nth-child(even) td{background:rgba(232,225,212,.025)}
     var q=search.value.trim().toLowerCase(), vis=0;
     cards.forEach(function(c){
       var okK=(html.dataset.filter==='all'||c.dataset.kind===html.dataset.filter),
-          okQ=!q||c.querySelector('.pname').textContent.toLowerCase().indexOf(q)>-1;
-      c.hidden=!(okK&&okQ); if(!(okK&&okQ)){c.open=false;}
-      if(okK&&okQ)vis++;
+          okQ=!q||c.querySelector('.pname').textContent.toLowerCase().indexOf(q)>-1, ok=okK&&okQ;
+      c.hidden=!ok; if(!ok){c.open=false;}else{vis++;}
     });
     groups.forEach(function(g){
       var n=[].slice.call(g.querySelectorAll('details.card')).filter(function(c){return !c.hidden}).length;
