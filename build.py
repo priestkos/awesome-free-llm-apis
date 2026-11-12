@@ -40,10 +40,11 @@ def inline(md: str) -> str:
     s = re.sub(r"\*\*([^*]+)\*\*", r"<b>\1</b>", s)
     s = re.sub(r"\[\^(\d+)\]",
                lambda m: f'<sup><a href="#fn-{m.group(1)}" title="footnote">{m.group(1)}</a></sup>', s)
-    # bare http(s) URLs not already inside an attribute or a tag
-    s = re.sub(r'(?<!["\'=/])(https?://[^\s<]+[^\s<."])',
-               r'<a href="\1">\1</a>', s)
-    return s
+    # bare http(s) URLs, skipping existing links and code spans (odd split parts)
+    parts = re.split(r"(<a .*?</a>|<code>.*?</code>)", s)
+    return "".join(p if i % 2 else re.sub(r'(?<!["\'=/])(https?://[^\s<]+[^\s<."])',
+                                          r'<a href="\1">\1</a>', p)
+                   for i, p in enumerate(parts))
 
 
 def slug(name: str) -> str:
