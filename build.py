@@ -151,7 +151,11 @@ def parse_group(lines):
     return intro, provs
 
 
-def card_html(pr, kind, seq):
+def card_html(pr, kind, seq, seen):
+    pid = slug(pr["name"])
+    if pid in seen:  # two names that slug alike would break the anchor
+        pid = f"{pid}-{seq}"
+    seen.add(pid)
     desc = "".join(f"<p>{inline(p)}</p>" for p in pr["desc_paras"])
     table = render_table(pr["table"]) if pr["table"] else ""
     primary_url = pr["urls"][0][1]
@@ -162,7 +166,7 @@ def card_html(pr, kind, seq):
         for label, url in pr["urls"]
     )
     return f"""
-<details class="card" id="p-{slug(pr['name'])}" data-kind="{kind}">
+<details class="card" id="p-{pid}" data-kind="{kind}">
 <summary>
 <span class="seq">{seq:02d}</span>
 <span class="pname">{esc(pr["name"])}</span>
@@ -179,12 +183,12 @@ def card_html(pr, kind, seq):
 </details>"""
 
 
-def group_html(title, kind, intro_paras, provs, seq_start):
+def group_html(title, kind, intro_paras, provs, seq_start, seen):
     sid = "provider-apis" if kind == "provider" else "inference-providers"
     gn = {"provider-apis": "P", "inference-providers": "I"}[sid]
     cards, s = [], seq_start
     for pr in provs:
-        cards.append(card_html(pr, kind, s))
+        cards.append(card_html(pr, kind, s, seen))
         s += 1
     intro = "".join(f'<p class="g-intro">{inline(p)}</p>' for p in intro_paras)
     return (f'<section class="group" id="{sid}" data-kind="{kind}">\n'
@@ -216,8 +220,9 @@ def main():
 
     intro_a, provs_a = parse_group(sec["Provider APIs"])
     intro_i, provs_i = parse_group(sec["Inference providers"])
-    body_a, n = group_html("Provider APIs", "provider", intro_a, provs_a, 1)
-    body_i, _ = group_html("Inference providers", "inference", intro_i, provs_i, n)
+    seen = set()
+    body_a, n = group_html("Provider APIs", "provider", intro_a, provs_a, 1, seen)
+    body_i, _ = group_html("Inference providers", "inference", intro_i, provs_i, n, seen)
 
     gtab = parse_table(sec["Glossary"])
     glossary = head_part("Glossary", "G", render_table(gtab))

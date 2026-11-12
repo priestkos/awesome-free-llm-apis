@@ -82,6 +82,11 @@ class BuildTests(unittest.TestCase):
         out = self.build(README)
         self.assertIn('<td>RPM</td><td>Requests per minute</td>', out)
 
+    def test_colliding_provider_slugs_get_unique_ids(self):
+        out = self.build(README.replace('[Example]', '[Cohere]'))
+        self.assertEqual(out.count('id="p-cohere"'), 1)
+        self.assertIn('id="p-cohere-2"', out)
+
 
 if __name__ == '__main__':
     unittest.main()
