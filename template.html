@@ -299,7 +299,7 @@ tr:nth-child(even) td{background:rgba(232,225,212,.025)}
         navigator.clipboard.writeText(u).then(done,function(){fallback()});}else{fallback();}
       function fallback(){
         var t=document.createElement('textarea');t.value=u;t.style.position='fixed';t.style.opacity='0';
-        document.body.appendChild(t);t.select();try{document.execCommand('copy');done();}catch(e){}
+        document.body.appendChild(t);t.select();try{if(document.execCommand('copy'))done();}catch(e){}
         t.remove();
       }
     });
