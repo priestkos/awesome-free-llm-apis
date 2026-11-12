@@ -16,6 +16,11 @@ class InlineTests(unittest.TestCase):
         self.assertEqual(build.inline('see https://a.com now'),
                          'see <a href="https://a.com">https://a.com</a> now')
 
+    def test_inline_link_with_parens(self):
+        out = build.inline('[w](https://en.wikipedia.org/wiki/A_(b)).')
+        self.assertIn('href="https://en.wikipedia.org/wiki/A_(b)"', out)
+        self.assertTrue(out.endswith('>w</a>.'), out)
+
 
 if __name__ == '__main__':
     unittest.main()
