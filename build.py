@@ -21,8 +21,7 @@ GH_BLOB = f"https://github.com/{SOURCE}/blob/main"
 HERE = pathlib.Path(__file__).resolve().parent
 
 
-def esc(s: str) -> str:
-    return htmllib.escape(s, quote=False).replace('"', "&quot;")
+esc = htmllib.escape  # &, <, >, " and '
 
 
 def resolve(url: str) -> str:
