@@ -34,9 +34,10 @@ def resolve(url: str) -> str:
 def inline(md: str) -> str:
     """Markdown inline (links, code, footnote refs, bare URLs) -> HTML."""
     s = esc(md)
-    # URL: non-space, non-paren chars or one level of balanced (...), as in Wikipedia links
+    # URL: non-space, non-paren chars or one level of balanced (...), as in Wikipedia links.
+    # The URL is already escaped with the rest of the line; escaping it again turns & into &amp;amp;.
     s = re.sub(r"\[([^\]]+)\]\(((?:[^\s()]|\([^\s()]*\))+)\)",
-               lambda m: f'<a href="{esc(resolve(m.group(2)))}">{m.group(1)}</a>', s)
+               lambda m: f'<a href="{resolve(m.group(2))}">{m.group(1)}</a>', s)
     s = re.sub(r"`([^`]+)`", r"<code>\1</code>", s)
     s = re.sub(r"\*\*([^*]+)\*\*", r"<b>\1</b>", s)
     s = re.sub(r"\[\^(\d+)\]",

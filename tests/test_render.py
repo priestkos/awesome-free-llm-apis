@@ -21,6 +21,10 @@ class InlineTests(unittest.TestCase):
         self.assertIn('href="https://en.wikipedia.org/wiki/A_(b)"', out)
         self.assertTrue(out.endswith('>w</a>.'), out)
 
+    def test_inline_link_ampersand_escaped_once(self):
+        out = build.inline('[q](https://a.com/?x=1&y=2)')
+        self.assertIn('href="https://a.com/?x=1&amp;y=2"', out)
+
 
 class TableTests(unittest.TestCase):
     def test_only_first_table_in_block(self):
